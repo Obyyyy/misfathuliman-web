@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -6,6 +8,11 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans:
+        "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+    --color-primary: oklch(62.7% 0.194 149.214);
+    --color-primary-dark: oklch(44.8% 0.119 151.328);
+    --color-primary-darker: oklch(39.3% 0.095 152.535);
 }
