@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PesanKontak;
+use App\Models\Kontak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\PesanKontak;
 
 class KontakController extends Controller
 {
@@ -17,7 +18,9 @@ class KontakController extends Controller
             ['label' => 'Kontak',     'url' => ''],
         ];
 
-        return view('pages.kontak', compact('title', 'subtitle', 'breadcrumbs'));
+        $contacts = Kontak::all();
+
+        return view('pages.kontak', compact('title', 'subtitle', 'breadcrumbs', 'contacts'));
     }
 
     public function kirim(Request $request)

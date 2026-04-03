@@ -27,8 +27,8 @@
         <div class="flex items-start space-x-4">
             <!-- Ikon -->
             <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 {{ $iconBg }}">
-                @if ($mitra['logo'])
-                    <img src="{{ asset('images/mitra/' . $mitra['logo']) }}" alt="Logo {{ $mitra['nama'] }}"
+                @if ($mitra['ikon_gambar'])
+                    <img src="{{ asset('storage/' . $mitra['ikon_gambar']) }}" alt="Logo {{ $mitra['nama'] }}"
                         class="w-7 h-7 object-contain">
                 @else
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@
                     {{ $mitra['nama'] }}
                 </p>
                 <span class="inline-block mt-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium {{ $badgeBg }}">
-                    {{ $mitra['jenis'] }}
+                    {{ $mitra['label'] }}
                 </span>
             </div>
         </div>

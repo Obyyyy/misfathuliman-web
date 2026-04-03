@@ -39,30 +39,14 @@
                             </svg>
                             <p
                                 class="text-base sm:text-lg lg:text-xl font-semibold text-gray-800 dark:text-gray-100 leading-relaxed">
-                                Terwujudnya peserta didik yang unggul dalam prestasi, berakhlakul karimah,
-                                beriman, dan bertakwa kepada Allah SWT, serta mampu menghadapi tantangan
-                                global dengan berlandaskan nilai-nilai Islam.
+                                {{ $visi->judul }}
                             </p>
                         </div>
                     </div>
 
                     <!-- Penjelasan visi -->
                     <div class="mt-6 space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                        <p>
-                            Visi ini merupakan cita-cita luhur yang ingin diwujudkan oleh MIS Fathul Iman dalam setiap
-                            proses pendidikan yang diselenggarakan. Kata <span
-                                class="font-semibold text-primary-dark dark:text-green-400">"unggul dalam
-                                prestasi"</span> mencerminkan
-                            komitmen madrasah untuk terus mendorong siswa berprestasi secara akademik maupun
-                            non-akademik, bersaing secara sehat di berbagai jenjang kompetisi.
-                        </p>
-                        <p>
-                            Sementara <span class="font-semibold text-primary-dark dark:text-green-400">"berakhlakul
-                                karimah, beriman, dan bertakwa"</span> menjadi fondasi utama yang
-                            membedakan lulusan madrasah dengan lembaga pendidikan lainnya. Karakter Islami yang kuat
-                            diyakini sebagai bekal terpenting bagi generasi penerus dalam menjalani kehidupan
-                            bermasyarakat, berbangsa, dan bernegara.
-                        </p>
+                        <p>{{ $visi->deskripsi }}</p>
                     </div>
                 </div>
 
@@ -105,136 +89,26 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
 
                         <!-- Misi 1 -->
-                        <div
-                            class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 sm:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-                            <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
-                                    <span
-                                        class="text-sm font-extrabold text-primary-dark dark:text-green-400 group-hover:text-white transition-colors duration-200">01</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1.5">
-                                        Pendidikan Agama yang Kuat
-                                    </h3>
-                                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                        Menyelenggarakan pembelajaran agama Islam secara menyeluruh, meliputi akidah,
-                                        ibadah, akhlak, Al-Qur'an, dan hadits, sehingga terbentuk pribadi Muslim
-                                        yang taat dan bertanggung jawab.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Misi 2 -->
-                        <div
-                            class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 sm:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-                            <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
-                                    <span
-                                        class="text-sm font-extrabold text-primary-dark dark:text-green-400 group-hover:text-white transition-colors duration-200">02</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1.5">
-                                        Pembelajaran Berkualitas &amp; Inovatif
-                                    </h3>
-                                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                        Melaksanakan proses belajar mengajar yang aktif, kreatif, efektif, dan
-                                        menyenangkan dengan memanfaatkan teknologi dan metode pembelajaran
-                                        mutakhir sesuai perkembangan zaman.
-                                    </p>
+                        @foreach ($misi as $index => $item)
+                            <div
+                                class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 sm:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+                                <div class="flex items-start space-x-4">
+                                    <div
+                                        class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
+                                        <span
+                                            class="text-sm font-extrabold text-primary-dark dark:text-green-400 group-hover:text-white transition-colors duration-200">{{ '0' . $index + 1 }}</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1.5">
+                                            {{ $item->judul }}
+                                        </h3>
+                                        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                            {{ $item->deskripsi }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Misi 3 -->
-                        <div
-                            class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 sm:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-                            <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
-                                    <span
-                                        class="text-sm font-extrabold text-primary-dark dark:text-green-400 group-hover:text-white transition-colors duration-200">03</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1.5">
-                                        Pembinaan Akhlak &amp; Karakter
-                                    </h3>
-                                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                        Membina dan mengembangkan karakter peserta didik melalui pembiasaan
-                                        ibadah harian, kedisiplinan, sopan santun, dan nilai-nilai kejujuran
-                                        dalam kehidupan sehari-hari di lingkungan madrasah maupun rumah.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Misi 4 -->
-                        <div
-                            class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 sm:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-                            <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
-                                    <span
-                                        class="text-sm font-extrabold text-primary-dark dark:text-green-400 group-hover:text-white transition-colors duration-200">04</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1.5">
-                                        Pengembangan Minat &amp; Bakat
-                                    </h3>
-                                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                        Memfasilitasi pengembangan potensi peserta didik melalui kegiatan
-                                        ekstrakurikuler, olimpiade, seni, olahraga, dan berbagai kompetisi
-                                        yang mendorong tumbuhnya rasa percaya diri dan jiwa kompetitif.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Misi 5 -->
-                        <div
-                            class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 sm:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-                            <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
-                                    <span
-                                        class="text-sm font-extrabold text-primary-dark dark:text-green-400 group-hover:text-white transition-colors duration-200">05</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1.5">
-                                        Peningkatan Kompetensi Pendidik
-                                    </h3>
-                                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                        Meningkatkan profesionalisme dan kompetensi tenaga pendidik melalui
-                                        pelatihan, workshop, studi banding, dan program pengembangan diri
-                                        secara berkelanjutan demi terwujudnya pembelajaran yang bermutu.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Misi 6 -->
-                        <div
-                            class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 sm:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-                            <div class="flex items-start space-x-4">
-                                <div
-                                    class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
-                                    <span
-                                        class="text-sm font-extrabold text-primary-dark dark:text-green-400 group-hover:text-white transition-colors duration-200">06</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1.5">
-                                        Kemitraan dengan Orang Tua &amp; Masyarakat
-                                    </h3>
-                                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                        Membangun sinergi yang harmonis antara madrasah, orang tua, dan
-                                        masyarakat sekitar dalam menciptakan ekosistem pendidikan yang kondusif,
-                                        saling mendukung, dan bertanggung jawab bersama.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
 
                     </div>
                 </div>

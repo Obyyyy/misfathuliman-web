@@ -19,7 +19,7 @@
                         <div>
                             <p class="text-xs text-gray-500 dark:text-gray-400">Wali Kelas</p>
                             <p class="font-semibold text-sm sm:text-base text-gray-900 dark:text-white">
-                                {{ $kelasSaat['wali_kelas'] }}
+                                {{ $kelasSaat->guru->guru_nama }}
                             </p>
                         </div>
                     </div>
@@ -57,16 +57,16 @@
                                 </th>
                                 <th
                                     class="text-left px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                    NIS
+                                    NISN
                                 </th>
                                 <th
                                     class="text-left px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                                     Jenis Kelamin
                                 </th>
-                                <th
+                                {{-- <th
                                     class="text-left px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                                     Tahun Masuk
-                                </th>
+                                </th> --}}
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
@@ -80,31 +80,31 @@
                                             <!-- Avatar inisial -->
                                             <div
                                                 class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold
-                                                {{ $s['jenis_kelamin'] === 'L'
+                                                {{ $s->siswa_gender === 'L'
                                                     ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400'
                                                     : 'bg-pink-100 dark:bg-pink-900/40 text-pink-600 dark:text-pink-400' }}">
-                                                {{ strtoupper(substr($s['nama'], 0, 1)) }}
+                                                {{ strtoupper(substr($s->siswa_nama, 0, 1)) }}
                                             </div>
                                             <span class="font-medium text-gray-900 dark:text-white">
-                                                {{ $s['nama'] }}
+                                                {{ $s->siswa_nama }}
                                             </span>
                                         </div>
                                     </td>
                                     <td class="px-5 py-3.5 text-gray-600 dark:text-gray-400 font-mono text-xs">
-                                        {{ $s['nis'] }}
+                                        {{ $s->siswa_nisn ? $s->siswa_nisn : '-' }}
                                     </td>
                                     <td class="px-5 py-3.5">
                                         <span
                                             class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
-                                            {{ $s['jenis_kelamin'] === 'L'
+                                            {{ $s->siswa_gender === 'L'
                                                 ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
                                                 : 'bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400' }}">
-                                            {{ $s['jenis_kelamin'] === 'L' ? 'Laki-laki' : 'Perempuan' }}
+                                            {{ $s->siswa_gender === 'L' ? 'Laki-laki' : 'Perempuan' }}
                                         </span>
                                     </td>
-                                    <td class="px-5 py-3.5 text-gray-600 dark:text-gray-400">
-                                        {{ $s['tahun_masuk'] }}
-                                    </td>
+                                    {{-- <td class="px-5 py-3.5 text-gray-600 dark:text-gray-400">
+                                        {{ $s->siswa_id }}
+                                    </td> --}}
                                 </tr>
                             @empty
                                 <tr>
@@ -126,27 +126,27 @@
                             <!-- Avatar -->
                             <div
                                 class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm
-                                {{ $s['jenis_kelamin'] === 'L'
+                                {{ $s->siswa_gender === 'L'
                                     ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400'
                                     : 'bg-pink-100 dark:bg-pink-900/40 text-pink-600 dark:text-pink-400' }}">
-                                {{ strtoupper(substr($s['nama'], 0, 1)) }}
+                                {{ strtoupper(substr($s->siswa_nama, 0, 1)) }}
                             </div>
                             <!-- Info -->
                             <div class="flex-1 min-w-0">
                                 <p class="font-semibold text-sm text-gray-900 dark:text-white truncate">
-                                    {{ $s['nama'] }}
+                                    {{ $s->siswa_nama }}
                                 </p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                                    NIS: {{ $s['nis'] }} · {{ $s['tahun_masuk'] }}
+                                    NISN: {{ $s->siswa_nisn }}
                                 </p>
                             </div>
                             <!-- Badge JK -->
                             <span
                                 class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium flex-shrink-0
-                                {{ $s['jenis_kelamin'] === 'L'
+                                {{ $s->siswa_gender === 'L'
                                     ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
                                     : 'bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400' }}">
-                                {{ $s['jenis_kelamin'] === 'L' ? 'L' : 'P' }}
+                                {{ $s->siswa_gender === 'L' ? 'L' : 'P' }}
                             </span>
                         </div>
                     @empty

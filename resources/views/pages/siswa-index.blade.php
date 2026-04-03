@@ -16,7 +16,7 @@
                 <!-- Grid kartu kelas -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
                     @foreach ($kelas as $k)
-                        <a href="{{ route('siswa.kelas', $k['slug']) }}"
+                        <a href="{{ route('siswa.kelas', 'kelas-' . $k->tingkat->tingkat_nama . $k->kelas_nama) }}"
                             class="group flex flex-col items-center justify-center bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-primary dark:hover:border-green-500 transition-all duration-200 p-6 sm:p-8 cursor-pointer">
 
                             <!-- Ikon kelas -->
@@ -32,17 +32,17 @@
                             <!-- Nama kelas -->
                             <p
                                 class="font-extrabold text-base sm:text-lg text-gray-900 dark:text-white text-center leading-tight">
-                                {{ $k['nama'] }}
+                                {{ $k->tingkat->tingkat_nama }}-{{ $k->kelas_nama }}
                             </p>
 
                             <!-- Jumlah siswa -->
                             <p class="mt-1.5 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                                {{ $k['jumlah_siswa'] }} siswa
+                                {{ $k->siswa->count() }} siswa
                             </p>
 
                             <!-- Wali kelas -->
                             <p class="mt-1 text-xs text-gray-400 dark:text-gray-500 text-center truncate w-full">
-                                Wali: {{ $k['wali_kelas'] }}
+                                Wali Kelas: {{ $k->guru->guru_nama }}
                             </p>
 
                             <!-- Panah -->

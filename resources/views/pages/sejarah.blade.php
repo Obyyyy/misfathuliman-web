@@ -19,7 +19,8 @@
                             <!-- Frame foto -->
                             <div
                                 class="relative rounded-2xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-                                <img src="{{ asset('images/foto-sekolah.jpg') }}" alt="Foto Gedung MIS Fathul Iman"
+                                <img src="{{ asset('storage/' . $gambarSekolah->gambar) }}"
+                                    alt="Foto Gedung MIS Fathul Iman"
                                     class="w-full h-64 sm:h-80 lg:h-96 object-cover transition-transform duration-500 group-hover:scale-105">
 
                                 <!-- Caption foto -->

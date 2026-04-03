@@ -112,6 +112,21 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        // Database dari Subdomain
+        'subdomain' => [
+            'driver'   => 'mysql',
+            'host'     => env('DB_SUBDOMAIN_HOST', '127.0.0.1'),
+            'port'     => env('DB_SUBDOMAIN_PORT', '3306'),
+            'database' => env('DB_SUBDOMAIN_DATABASE'),
+            'username' => env('DB_SUBDOMAIN_USERNAME'),
+            'password' => env('DB_SUBDOMAIN_PASSWORD'),
+            'charset'  => 'utf8mb4',
+            'collation'=> 'utf8mb4_unicode_ci',
+            'prefix'   => '',
+            'strict'   => true,
+            'engine'   => null,
+        ]
+
     ],
 
     /*

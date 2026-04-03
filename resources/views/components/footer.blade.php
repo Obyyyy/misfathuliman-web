@@ -26,9 +26,7 @@
                         <div>
                             <p class="font-semibold text-gray-300 dark:text-white">Alamat</p>
                             <p class="text-gray-300 dark:text-gray-400">
-                                Jl. RTA Milono Km. 2,5 No.44, Langkai, Kec. Pahandut, Kota Palangka Raya,
-                                Kalimantan
-                                Tengah, 74874
+                                {{ $kontakFooter->get('Alamat')?->value ?? '-' }}
                             </p>
                         </div>
                     </div>
@@ -45,7 +43,7 @@
                         <div>
                             <p class="font-semibold text-gray-100 dark:text-white">Email</p>
                             <p class="text-gray-300 dark:text-gray-400">
-                                info@misfathuliman.sch.id
+                                {{ $kontakFooter->get('Email')?->value ?? '-' }}
                             </p>
                         </div>
                     </div>
@@ -62,7 +60,7 @@
                         <div>
                             <p class="font-semibold text-gray-100 dark:text-white">Telepon</p>
                             <p class="text-gray-300 dark:text-gray-400">
-                                (021) 1234 5678 / 0812 3456 7890
+                                {{ $kontakFooter->get('Telepon')?->value ?? '-' }}
                             </p>
                         </div>
                     </div>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MIS Fathul Iman - Website</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         /* Smooth scroll */
         html {
@@ -289,7 +289,7 @@
         </svg>
     </button>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    {{-- <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> --}}
     <script>
         // =============================================
         // PAGE LOADER
@@ -355,7 +355,7 @@
         })();
 
         // Dynamic year
-        document.getElementById('yearSpan').textContent = new Date().getFullYear();
+        // document.getElementById('yearSpan').textContent = new Date().getFullYear();
 
         // =============================================
         // TOGGLE DARK MODE
@@ -496,6 +496,7 @@
             });
         });
     </script>
+    @stack('scripts')
 </body>
 
 </html>

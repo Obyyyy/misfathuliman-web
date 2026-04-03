@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gambar;
+use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\KerjaSama;
+use App\Models\Setting;
+use App\Models\Siswa;
+use App\Models\VisiMisi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -19,7 +27,7 @@ class PageController extends Controller
                 'tanggal'       => '2025-01-15',
                 'kategori'      => 'Program Kerja',
                 'kategori_slug' => 'program-kerja',
-                'thumbnail'     => null,
+                'thumbnail'     => 'thumbnail-1.jfif',
                 'views'         => 342,
             ],
             [
@@ -30,7 +38,7 @@ class PageController extends Controller
                 'tanggal'       => '2025-01-12',
                 'kategori'      => 'Prestasi Siswa',
                 'kategori_slug' => 'prestasi-siswa',
-                'thumbnail'     => null,
+                'thumbnail'     => 'thumbnail-2.jfif',
                 'views'         => 891,
             ],
             [
@@ -41,14 +49,59 @@ class PageController extends Controller
                 'tanggal'       => '2025-02-10',
                 'kategori'      => 'Prestasi Siswa',
                 'kategori_slug' => 'prestasi-siswa',
-                'thumbnail'     => null,
+                'thumbnail'     => 'thumbnail-1.jfif',
                 'views'         => 674,
             ],
         ]);
 
-        $beritaTerbaru = $semuaBerita->sortByDesc('tanggal')->take(3)->values()->toArray();
+        $tahun = Setting::get('tahun_ajaran', '2025');
+        $jumlahSiswa = Siswa::where('kelas_id', 'like',$tahun.'%')->count();
+        $jumlahKelas = Kelas::where('kelas_id', 'like',$tahun.'%')->count();
+        $jumlahGuru = Guru::where('guru_aktif', 1)->count();
 
-        return view('landing', compact('beritaTerbaru'));
+        $statistik = [
+            ['angka' => $jumlahGuru,  'label' => 'Guru & Staf'],
+            ['angka' => $jumlahSiswa, 'label' => 'Siswa'],
+            ['angka' => $jumlahKelas,  'label' => 'Rombel'],
+        ];
+
+        $kepala = [
+            'nama'     => 'Marjuki, M.Pd',
+            // 'nip'      => 'NIP. 19XX0101 XXXX XX X XXX',
+            'sambutan' => 'Assalamu\'alaikum Warahmatullahi Wabarakatuh. Puji syukur kehadirat Allah SWT yang telah memberikan rahmat dan hidayah-Nya. Selamat datang di website resmi MIS Fathul Iman Palangka Raya. Madrasah kami berkomitmen memberikan pendidikan terbaik yang memadukan ilmu pengetahuan dan nilai keislaman demi mencetak generasi Qur\'ani yang cerdas dan berakhlak mulia.',
+        ];
+
+        $heroSlides = [
+            [
+                'foto'          => 'slide-1.jpg',
+                'judul'         => 'Program Tahfidz Al-Qur\'an Semester Genap 2025 Resmi Dimulai',
+                'ringkasan'     => 'MIS Fathul Iman kembali menggelar program tahfidz intensif untuk seluruh siswa kelas 3 hingga kelas 6.',
+                'kategori'      => 'Program Kerja',
+                'kategori_slug' => 'program-kerja',
+                'link'          => route('berita.show', 'program-tahfidz-quran-2025'),
+            ],
+            [
+                'foto'          => 'slide-2.jpg',
+                'judul'         => 'Siswa MIS Fathul Iman Raih Juara 1 Olimpiade Sains Kota Palangka Raya',
+                'ringkasan'     => 'Ahmad Fauzi, siswa kelas 5A, berhasil meraih medali emas dalam Olimpiade Sains tingkat kota.',
+                'kategori'      => 'Prestasi Siswa',
+                'kategori_slug' => 'prestasi-siswa',
+                'link'          => route('berita.show', 'juara-olimpiade-sains-2025'),
+            ],
+            [
+                'foto'          => 'slide-3.jpg',
+                'judul'         => 'Pesantren Kilat Ramadan 1446H: Mempererat Ukhuwah dan Memperdalam Iman',
+                'ringkasan'     => 'Seluruh siswa MIS Fathul Iman mengikuti Pesantren Kilat Ramadan selama 3 hari penuh kegiatan Islami.',
+                'kategori'      => 'Program Kerja',
+                'kategori_slug' => 'program-kerja',
+                'link'          => route('berita.show', 'program-pesantren-kilat-ramadan'),
+            ],
+        ];
+
+        $beritaTerbaru = $semuaBerita->sortByDesc('tanggal')->take(3)->values()->toArray();
+        $gambarSekolah = Gambar::where('jenis', 'Foto Sekolah')->first();
+        return view('landing', compact('heroSlides', 'kepala', 'statistik', 'beritaTerbaru', 'gambarSekolah'));
+        // return view('landing', compact('beritaTerbaru'));
     }
 
     public function profile() {
@@ -70,7 +123,9 @@ class PageController extends Controller
             ['label' => 'Profil', 'url' => ''],
             ['label' => 'Sejarah Madrasah', 'url' => ''],
         ];
-        return view('pages.sejarah', compact('title', 'subtitle', 'breadcrumbs'));
+
+        $gambarSekolah = Gambar::where('jenis', 'Foto Sekolah')->first();
+        return view('pages.sejarah', compact('title', 'subtitle', 'breadcrumbs', 'gambarSekolah'));
     }
 
     public function visimisi() {
@@ -81,7 +136,10 @@ class PageController extends Controller
             ['label' => 'Profil', 'url' => ''],
             ['label' => 'Visi & Misi', 'url' => ''],
         ];
-        return view('pages.visi-misi', compact('title', 'subtitle', 'breadcrumbs'));
+
+        $visi = VisiMisi::where('jenis', 'Visi')->first();
+        $misi = VisiMisi::where('jenis', 'Misi')->get();
+        return view('pages.visi-misi', compact('title', 'subtitle', 'breadcrumbs', 'visi', 'misi'));
     }
 
     public function stafPengajar() {
@@ -103,80 +161,91 @@ class PageController extends Controller
             ['label' => 'Profil', 'url' => ''],
             ['label' => 'Mitra Kerja Sama', 'url' => ''],
         ];
-        return view('pages.kerjasama', compact('title', 'subtitle', 'breadcrumbs'));
+
+        $mitras = KerjaSama::all();
+        return view('pages.kerjasama', compact('title', 'subtitle', 'breadcrumbs', 'mitras'));
     }
 
-    public function kontak() {
-        $title = "Kontak";
-        $subtitle = "";
-        $breadcrumbs = [
-            ['label' => 'Beranda', 'url' => '/'],
-            ['label' => 'Profil', 'url' => ''],
-            ['label' => 'Mitra Kerja Sama', 'url' => ''],
+    public function sambutan()  {
+        $kepala = [
+            // 'nip'   => 'NIP. 19XX0101 XXXX XX X XXX',
+            'nama'  => 'Marjuki, M.Pd',
         ];
-        return view('pages.kontak', compact('title', 'subtitle', 'breadcrumbs'));
+        return view('pages.sambutan', compact('kepala'));
     }
 
-    // Data kelas — bisa dipindah ke database/model nantinya
-    private function dataKelas(): array
+    public function strukturOrganisasi()
     {
-        return [
-            ['slug' => 'kelas-1a', 'nama' => 'Kelas 1A', 'wali_kelas' => 'Nama Wali Kelas 1A', 'jumlah_siswa' => 28],
-            ['slug' => 'kelas-1b', 'nama' => 'Kelas 1B', 'wali_kelas' => 'Nama Wali Kelas 1B', 'jumlah_siswa' => 27],
-            ['slug' => 'kelas-2a', 'nama' => 'Kelas 2A', 'wali_kelas' => 'Nama Wali Kelas 2A', 'jumlah_siswa' => 30],
-            ['slug' => 'kelas-2b', 'nama' => 'Kelas 2B', 'wali_kelas' => 'Nama Wali Kelas 2B', 'jumlah_siswa' => 29],
-            ['slug' => 'kelas-3a', 'nama' => 'Kelas 3A', 'wali_kelas' => 'Nama Wali Kelas 3A', 'jumlah_siswa' => 28],
-            ['slug' => 'kelas-3b', 'nama' => 'Kelas 3B', 'wali_kelas' => 'Nama Wali Kelas 3B', 'jumlah_siswa' => 26],
-            ['slug' => 'kelas-4a', 'nama' => 'Kelas 4A', 'wali_kelas' => 'Nama Wali Kelas 4A', 'jumlah_siswa' => 30],
-            ['slug' => 'kelas-4b', 'nama' => 'Kelas 4B', 'wali_kelas' => 'Nama Wali Kelas 4B', 'jumlah_siswa' => 28],
-            ['slug' => 'kelas-5a', 'nama' => 'Kelas 5A', 'wali_kelas' => 'Nama Wali Kelas 5A', 'jumlah_siswa' => 27],
-            ['slug' => 'kelas-5b', 'nama' => 'Kelas 5B', 'wali_kelas' => 'Nama Wali Kelas 5B', 'jumlah_siswa' => 25],
-            ['slug' => 'kelas-6a', 'nama' => 'Kelas 6A', 'wali_kelas' => 'Nama Wali Kelas 6A', 'jumlah_siswa' => 28],
-            ['slug' => 'kelas-6b', 'nama' => 'Kelas 6B', 'wali_kelas' => 'Nama Wali Kelas 6B', 'jumlah_siswa' => 26],
-        ];
-    }
-
-    // Halaman daftar semua kelas
-    public function indexSiswa()
-    {
-        $title      = 'Data Siswa';
-        $subtitle   = 'Daftar siswa aktif MIS Fathul Iman per kelas';
+        $title      = 'Struktur Organisasi';
+        $subtitle   = 'Bagan struktur organisasi MIS Fathul Iman Palangka Raya';
         $breadcrumbs = [
-            ['label' => 'Beranda',     'url' => '/'],
-            ['label' => 'Data Siswa',  'url' => ''],
+            ['label' => 'Beranda',               'url' => '/'],
+            ['label' => 'Profil',                'url' => ''],
+            ['label' => 'Struktur Organisasi',   'url' => ''],
         ];
 
-        $kelas = $this->dataKelas();
-
-        return view('pages.siswa-index', compact('title', 'subtitle', 'breadcrumbs', 'kelas'));
+        $gambar = Gambar::where('jenis', 'Struktur Organisasi')->first();
+        return view('pages.struktur-organisasi', compact('title', 'subtitle', 'breadcrumbs', 'gambar'));
     }
 
-    // Halaman detail siswa per kelas
-    public function SiswaPerKelas(string $slug)
-    {
-        // Cari data kelas berdasarkan slug
-        $kelasSaat = collect($this->dataKelas())->firstWhere('slug', $slug);
+    private function dataAngkatan(): array
+{
+    return [
+        ['tahun' => '2024', 'jumlah' => 48],
+        ['tahun' => '2023', 'jumlah' => 51],
+        ['tahun' => '2022', 'jumlah' => 45],
+        ['tahun' => '2021', 'jumlah' => 43],
+        ['tahun' => '2020', 'jumlah' => 40],
+        ['tahun' => '2019', 'jumlah' => 38],
+        ['tahun' => '2018', 'jumlah' => 36],
+        ['tahun' => '2017', 'jumlah' => 34],
+    ];
+}
 
-        // Kalau slug tidak ditemukan, lempar 404
-        abort_if(!$kelasSaat, 404);
+// ---------------------------------------------------------------------
+// Halaman daftar alumni per angkatan
+// ---------------------------------------------------------------------
+public function indexAlumni()
+{
+    $title      = 'Data Alumni';
+    $subtitle   = 'Daftar alumni MIS Fathul Iman berdasarkan tahun kelulusan';
+    $breadcrumbs = [
+        ['label' => 'Beranda',      'url' => '/'],
+        ['label' => 'Data Alumni',  'url' => ''],
+    ];
 
-        $title      = $kelasSaat['nama'];
-        $subtitle   = 'Daftar siswa aktif ' . $kelasSaat['nama'] . ' MIS Fathul Iman';
-        $breadcrumbs = [
-            ['label' => 'Beranda',        'url' => '/'],
-            ['label' => 'Data Siswa',     'url' => route('siswa.index')],
-            ['label' => $kelasSaat['nama'], 'url' => ''],
-        ];
+    $angkatan = $this->dataAngkatan();
 
-        // Contoh data siswa — ganti dengan query Eloquent jika sudah ada model
-        $siswa = [
-            ['nama' => 'Ahmad Fauzi',      'nis' => '2024001', 'jenis_kelamin' => 'L', 'tahun_masuk' => '2024'],
-            ['nama' => 'Siti Rahmawati',   'nis' => '2024002', 'jenis_kelamin' => 'P', 'tahun_masuk' => '2024'],
-            ['nama' => 'Muhammad Rizki',   'nis' => '2024003', 'jenis_kelamin' => 'L', 'tahun_masuk' => '2024'],
-            ['nama' => 'Nur Haliza',       'nis' => '2024004', 'jenis_kelamin' => 'P', 'tahun_masuk' => '2024'],
-            ['nama' => 'Abdurrahman',      'nis' => '2024005', 'jenis_kelamin' => 'L', 'tahun_masuk' => '2024'],
-        ];
+    return view('pages.alumni-index', compact('title', 'subtitle', 'breadcrumbs', 'angkatan'));
+}
 
-        return view('pages.siswa-kelas', compact('title', 'subtitle', 'breadcrumbs', 'kelasSaat', 'siswa'));
-    }
+// ---------------------------------------------------------------------
+// Halaman detail alumni per tahun
+// ---------------------------------------------------------------------
+public function alumniPerTahun(string $tahun)
+{
+    // Validasi tahun ada di data angkatan
+    $angkatanValid = collect($this->dataAngkatan())->firstWhere('tahun', $tahun);
+    abort_if(!$angkatanValid, 404);
+
+    $title      = 'Alumni Angkatan ' . $tahun;
+    $subtitle   = 'Daftar alumni MIS Fathul Iman yang lulus tahun ' . $tahun;
+    $breadcrumbs = [
+        ['label' => 'Beranda',              'url' => '/'],
+        ['label' => 'Data Alumni',          'url' => route('alumni.index')],
+        ['label' => 'Angkatan ' . $tahun,  'url' => ''],
+    ];
+
+    // Contoh data alumni — ganti dengan query Eloquent jika sudah ada model
+    // Contoh: Alumni::where('tahun_lulus', $tahun)->orderBy('nama')->get()
+    $alumni = [
+        ['nama' => 'Ahmad Fauzi',       'nis' => '2018001', 'jenis_kelamin' => 'L', 'tahun_lulus' => $tahun],
+        ['nama' => 'Siti Rahmawati',    'nis' => '2018002', 'jenis_kelamin' => 'P', 'tahun_lulus' => $tahun],
+        ['nama' => 'Muhammad Rizki',    'nis' => '2018003', 'jenis_kelamin' => 'L', 'tahun_lulus' => $tahun],
+        ['nama' => 'Nur Haliza',        'nis' => '2018004', 'jenis_kelamin' => 'P', 'tahun_lulus' => $tahun],
+        ['nama' => 'Abdurrahman',       'nis' => '2018005', 'jenis_kelamin' => 'L', 'tahun_lulus' => $tahun],
+    ];
+
+    return view('pages.alumni-tahun', compact('title', 'subtitle', 'breadcrumbs', 'tahun', 'alumni'));
+}
 }

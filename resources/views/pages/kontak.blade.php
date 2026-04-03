@@ -197,44 +197,69 @@
                             </div>
 
                             <div class="space-y-3">
-                                @foreach ([
-        [
-            'icon' => 'M17.657 16.657L13.414 12.414C12.633 11.633 11.367 11.633 10.586 12.414L6.343 16.657M8 10a4 4 0 118 0 4 4 0 01-8 0z',
-            'label' => 'Alamat',
-            'nilai' => 'Jl. RTA Milono Km. 2,5 No. 44, Langkai, Kec. Pahandut, Kota Palangka Raya, Kalimantan Tengah 74874',
-        ],
-        [
-            'icon' => 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 18.72V22a2 2 0 01-2 2h-1C9.82 24 4 18.18 4 11V10a2 2 0 012-2z',
-            'label' => 'Telepon',
-            'nilai' => '(0536) 1234 5678',
-        ],
-        [
-            'icon' => 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-            'label' => 'Email',
-            'nilai' => 'info@misfathuliman.sch.id',
-        ],
-    ] as $info)
+                                <div
+                                    class="flex items-start space-x-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-4 transition-colors duration-300">
                                     <div
-                                        class="flex items-start space-x-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-4 transition-colors duration-300">
-                                        <div
-                                            class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/40 flex items-center justify-center flex-shrink-0 text-primary-dark dark:text-green-400">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="{{ $info['icon'] }}" />
-                                            </svg>
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <p
-                                                class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                                                {{ $info['label'] }}
-                                            </p>
-                                            <p class="mt-0.5 text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
-                                                {{ $info['nilai'] }}
-                                            </p>
-                                        </div>
+                                        class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/40 flex items-center justify-center flex-shrink-0 text-primary-dark dark:text-green-400">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17.657 16.657L13.414 12.414C12.633 11.633 11.367 11.633 10.586 12.414L6.343 16.657M8 10a4 4 0 118 0 4 4 0 01-8 0z" />
+                                        </svg>
                                     </div>
-                                @endforeach
+                                    <div class="flex-1 min-w-0">
+                                        <p
+                                            class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                                            {{ $contacts->where('name', 'Alamat')->first()->name }}
+                                        </p>
+                                        <p class="mt-0.5 text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
+                                            {{ $contacts->where('name', 'Alamat')->first()->value }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Email -->
+                                <div
+                                    class="flex items-start space-x-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-4 transition-colors duration-300">
+                                    <div
+                                        class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/40 flex items-center justify-center flex-shrink-0 text-primary-dark dark:text-green-400">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p
+                                            class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                                            {{ $contacts->where('name', 'Email')->first()->name }}
+                                        </p>
+                                        <p class="mt-0.5 text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
+                                            {{ $contacts->where('name', 'Email')->first()->value }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Telepon -->
+                                <div
+                                    class="flex items-start space-x-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-4 transition-colors duration-300">
+                                    <div
+                                        class="w-9 h-9 rounded-lg bg-green-100 dark:bg-green-900/40 flex items-center justify-center flex-shrink-0 text-primary-dark dark:text-green-400">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 18.72V22a2 2 0 01-2 2h-1C9.82 24 4 18.18 4 11V10a2 2 0 012-2z" />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p
+                                            class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                                            {{ $contacts->where('name', 'Telepon')->first()->name }}
+                                        </p>
+                                        <p class="mt-0.5 text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
+                                            {{ $contacts->where('name', 'Telepon')->first()->value }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

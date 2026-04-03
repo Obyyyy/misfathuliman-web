@@ -74,14 +74,16 @@
                             <a href="{{ route('sejarah') }}"
                                 class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-150">Sejarah
                                 Singkat Madrasah</a>
+                            <a href="{{ route('strukturOrganisasi') }}"
+                                class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-150">Struktur
+                                Organisasi</a>
                             <a href="{{ route('pengajar') }}"
                                 class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-150">Guru
                                 dan Tata Usaha</a>
                             <a href="{{ route('siswa.index') }}"
                                 class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-150">Siswa</a>
-                            <a href="#struktur-organisasi"
-                                class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-150">Struktur
-                                Organisasi</a>
+                            <a href="{{ route('alumni.index') }}"
+                                class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-150">Alumni</a>
                             <a href="{{ route('kerjasama') }}"
                                 class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-150">Kerjasama</a>
                         </div>
@@ -199,14 +201,16 @@
                         <a href="{{ route('sejarah') }}"
                             class="block px-2 py-1 rounded hover:bg-primary-dark/60 dark:hover:bg-gray-700 transition-colors duration-150">Sejarah
                             Singkat Madrasah</a>
+                        <a href="{{ route('strukturOrganisasi') }}"
+                            class="block px-2 py-1 rounded hover:bg-primary-dark/60 dark:hover:bg-gray-700 transition-colors duration-150">Struktur
+                            Organisasi</a>
                         <a href="{{ route('pengajar') }}"
                             class="block px-2 py-1 rounded hover:bg-primary-dark/60 dark:hover:bg-gray-700 transition-colors duration-150">Guru
                             dan Tata Usaha</a>
                         <a href="{{ route('siswa.index') }}"
                             class="block px-2 py-1 rounded hover:bg-primary-dark/60 dark:hover:bg-gray-700 transition-colors duration-150">Siswa</a>
-                        <a href="#struktur-organisasi"
-                            class="block px-2 py-1 rounded hover:bg-primary-dark/60 dark:hover:bg-gray-700 transition-colors duration-150">Struktur
-                            Organisasi</a>
+                        <a href="{{ route('alumni.index') }}"
+                            class="block px-2 py-1 rounded hover:bg-primary-dark/60 dark:hover:bg-gray-700 transition-colors duration-150">Alumni</a>
                         <a href="{{ route('kerjasama') }}"
                             class="block px-2 py-1 rounded hover:bg-primary-dark/60 dark:hover:bg-gray-700 transition-colors duration-150">Kerjasama</a>
                     </div>
