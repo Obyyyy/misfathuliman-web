@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Berita extends Model
@@ -11,24 +13,22 @@ class Berita extends Model
     /** @use HasFactory<\Database\Factories\BeritaFactory> */
     use HasFactory;
 
-    protected $table = 'beritas';
+    protected $table = 'berita';
 
     protected $fillable = [
         'slug',
         'judul',
-        'ringkasan',
         'konten',
-        'penulis',
+        'user_id',
         'tanggal',
-        'kategori',
-        'kategori_slug',
+        'kategori_id',
         'thumbnail',
         'views',
     ];
 
     protected $casts = [
-        'tanggal' => 'date',
-        'views'   => 'integer',
+        'tanggal'      => 'date',
+        'views'        => 'integer',
     ];
 
     // Auto-generate slug dari judul
@@ -39,17 +39,35 @@ class Berita extends Model
                 $berita->slug = Str::slug($berita->judul);
             }
         });
-    }
 
-    // Scope filter kategori
-    public function scopeKategori($query, string $slug)
-    {
-        return $query->where('kategori_slug', $slug);
+        static::deleting(function ($model) {
+            if ($model->thumbnail) {
+                Storage::disk('public')->delete($model->thumbnail);
+            }
+        });
+
+        static::updating(function ($model) {
+            if ($model->isDirty('thumbnail')) {
+            $old = $model->getOriginal('thumbnail');
+
+                if ($old) {
+                    Storage::disk('public')->delete($old);
+                }
+            }
+        });
     }
 
     // Increment views
     public function incrementViews(): void
     {
         $this->increment('views');
+    }
+
+    public function kategoriBerita(): BelongsTo {
+        return $this->belongsTo(KategoriBerita::class, 'kategori_id', 'id');
+    }
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

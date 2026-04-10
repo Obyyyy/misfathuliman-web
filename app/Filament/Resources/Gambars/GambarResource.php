@@ -22,7 +22,7 @@ class GambarResource extends Resource
     protected static ?string $breadcrumb = 'Gambar';
     protected static ?string $slug = 'gambar';
     protected static ?string $navigationLabel = 'Gambar';
-    protected static string|UnitEnum|null $navigationGroup = 'Profil';
+    protected static string|UnitEnum|null $navigationGroup = 'Profil Sekolah';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
 
     public static function form(Schema $schema): Schema

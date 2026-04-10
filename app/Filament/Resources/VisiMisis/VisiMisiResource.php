@@ -25,7 +25,7 @@ class VisiMisiResource extends Resource
 
     protected static ?string $slug = 'visi-misi';
     protected static ?string $navigationLabel = 'Visi & Misi';
-    protected static string|UnitEnum|null $navigationGroup = 'Profil';
+    protected static string|UnitEnum|null $navigationGroup = 'Profil Sekolah';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheckBadge;
 
     // protected ?string $heading = 'Custom Page Heading';

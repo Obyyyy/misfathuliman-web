@@ -22,7 +22,7 @@ class KerjaSamaResource extends Resource
     protected static ?string $breadcrumb = 'Kerja Sama';
     protected static ?string $slug = 'kerja-sama';
     protected static ?string $navigationLabel = 'Kerja Sama';
-    protected static string|UnitEnum|null $navigationGroup = 'Profil';
+    protected static string|UnitEnum|null $navigationGroup = 'Profil Sekolah';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice;
 
     public static function form(Schema $schema): Schema

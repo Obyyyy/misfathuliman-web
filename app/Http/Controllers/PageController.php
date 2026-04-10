@@ -2,58 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
 use App\Models\Gambar;
 use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\KerjaSama;
+use App\Models\Pengumuman;
 use App\Models\Setting;
 use App\Models\Siswa;
+use App\Models\SlideShow;
 use App\Models\VisiMisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
     public function index() {
-        // Ambil 3 berita terbaru dari BeritaController
-        // Jika sudah pakai database, ganti dengan: Berita::latest()->take(3)->get()
-        $beritaController = new BeritaController();
-        $semuaBerita = collect([
-            [
-                'slug'          => 'program-tahfidz-quran-2025',
-                'judul'         => 'Program Tahfidz Al-Qur\'an Semester Genap 2025 Resmi Dimulai',
-                'ringkasan'     => 'MIS Fathul Iman kembali menggelar program tahfidz intensif untuk seluruh siswa kelas 3 hingga kelas 6 pada semester genap tahun ajaran 2024/2025.',
-                'penulis'       => 'Admin Madrasah',
-                'tanggal'       => '2025-01-15',
-                'kategori'      => 'Program Kerja',
-                'kategori_slug' => 'program-kerja',
-                'thumbnail'     => 'thumbnail-1.jfif',
-                'views'         => 342,
-            ],
-            [
-                'slug'          => 'juara-olimpiade-sains-2025',
-                'judul'         => 'Siswa MIS Fathul Iman Raih Juara 1 Olimpiade Sains Kota Palangka Raya',
-                'ringkasan'     => 'Kebanggaan untuk MIS Fathul Iman! Ahmad Fauzi, siswa kelas 5A, berhasil meraih medali emas dalam Olimpiade Sains tingkat kota Palangka Raya cabang Matematika.',
-                'penulis'       => 'Admin Madrasah',
-                'tanggal'       => '2025-01-12',
-                'kategori'      => 'Prestasi Siswa',
-                'kategori_slug' => 'prestasi-siswa',
-                'thumbnail'     => 'thumbnail-2.jfif',
-                'views'         => 891,
-            ],
-            [
-                'slug'          => 'juara-kaligrafi-tingkat-provinsi',
-                'judul'         => 'Luar Biasa! Siswi MIS Fathul Iman Juara 2 Kaligrafi Tingkat Provinsi Kalteng',
-                'ringkasan'     => 'Nur Haliza, siswi kelas 6B, mengharumkan nama MIS Fathul Iman dengan meraih Juara 2 Lomba Kaligrafi Islam tingkat Provinsi Kalimantan Tengah.',
-                'penulis'       => 'Admin Madrasah',
-                'tanggal'       => '2025-02-10',
-                'kategori'      => 'Prestasi Siswa',
-                'kategori_slug' => 'prestasi-siswa',
-                'thumbnail'     => 'thumbnail-1.jfif',
-                'views'         => 674,
-            ],
-        ]);
-
         $tahun = Setting::get('tahun_ajaran', '2025');
         $jumlahSiswa = Siswa::where('kelas_id', 'like',$tahun.'%')->count();
         $jumlahKelas = Kelas::where('kelas_id', 'like',$tahun.'%')->count();
@@ -71,36 +36,15 @@ class PageController extends Controller
             'sambutan' => 'Assalamu\'alaikum Warahmatullahi Wabarakatuh. Puji syukur kehadirat Allah SWT yang telah memberikan rahmat dan hidayah-Nya. Selamat datang di website resmi MIS Fathul Iman Palangka Raya. Madrasah kami berkomitmen memberikan pendidikan terbaik yang memadukan ilmu pengetahuan dan nilai keislaman demi mencetak generasi Qur\'ani yang cerdas dan berakhlak mulia.',
         ];
 
-        $heroSlides = [
-            [
-                'foto'          => 'slide-1.jpg',
-                'judul'         => 'Program Tahfidz Al-Qur\'an Semester Genap 2025 Resmi Dimulai',
-                'ringkasan'     => 'MIS Fathul Iman kembali menggelar program tahfidz intensif untuk seluruh siswa kelas 3 hingga kelas 6.',
-                'kategori'      => 'Program Kerja',
-                'kategori_slug' => 'program-kerja',
-                'link'          => route('berita.show', 'program-tahfidz-quran-2025'),
-            ],
-            [
-                'foto'          => 'slide-2.jpg',
-                'judul'         => 'Siswa MIS Fathul Iman Raih Juara 1 Olimpiade Sains Kota Palangka Raya',
-                'ringkasan'     => 'Ahmad Fauzi, siswa kelas 5A, berhasil meraih medali emas dalam Olimpiade Sains tingkat kota.',
-                'kategori'      => 'Prestasi Siswa',
-                'kategori_slug' => 'prestasi-siswa',
-                'link'          => route('berita.show', 'juara-olimpiade-sains-2025'),
-            ],
-            [
-                'foto'          => 'slide-3.jpg',
-                'judul'         => 'Pesantren Kilat Ramadan 1446H: Mempererat Ukhuwah dan Memperdalam Iman',
-                'ringkasan'     => 'Seluruh siswa MIS Fathul Iman mengikuti Pesantren Kilat Ramadan selama 3 hari penuh kegiatan Islami.',
-                'kategori'      => 'Program Kerja',
-                'kategori_slug' => 'program-kerja',
-                'link'          => route('berita.show', 'program-pesantren-kilat-ramadan'),
-            ],
-        ];
+        $heroSlides = SlideShow::with('berita')->orderBy('urutan')->get();
 
-        $beritaTerbaru = $semuaBerita->sortByDesc('tanggal')->take(3)->values()->toArray();
+        $beritaTerbaru = Berita::with(['kategoriBerita', 'user'])
+                ->latest()
+                ->take(3)
+                ->get();
         $gambarSekolah = Gambar::where('jenis', 'Foto Sekolah')->first();
-        return view('landing', compact('heroSlides', 'kepala', 'statistik', 'beritaTerbaru', 'gambarSekolah'));
+        $pengumuman = Pengumuman::first();
+        return view('landing', compact('heroSlides', 'kepala', 'statistik', 'beritaTerbaru', 'gambarSekolah', 'pengumuman'));
         // return view('landing', compact('beritaTerbaru'));
     }
 

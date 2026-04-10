@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('beritas', function (Blueprint $table) {
+        Schema::create('berita', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
             $table->string('judul');
-            $table->text('ringkasan');
             $table->longText('konten');
-            $table->string('penulis');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->date('tanggal');
-            $table->string('kategori');
-            $table->string('kategori_slug');
+            $table->foreignId('kategori_id')->references('id')->on('kategori_berita')->onDelete('cascade');
             $table->string('thumbnail')->nullable();
             $table->unsignedInteger('views')->default(0);
             $table->timestamps();

@@ -2,7 +2,7 @@
     <main id="beranda">
 
         <!-- =============================================
-             HERO SLIDER
+            HERO SLIDER
         ============================================= -->
         <section class="relative w-full overflow-hidden bg-gray-900" style="height: clamp(280px, 55vw, 580px);">
 
@@ -14,32 +14,32 @@
                                 {{ $i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' }}">
 
                         <!-- Foto latar -->
-                        <img src="" data-src="{{ asset('images/hero/' . $slide['foto']) }}"
-                            alt="{{ $slide['judul'] }}" class="w-full h-full object-cover"
+                        <img src="{{ asset('storage/' . $slide->berita->thumbnail) }}" alt="{{ $slide->berita->judul }}"
+                            class="w-full h-full object-cover"
                             onerror="this.style.display='none'; this.closest('.hero-slide').style.background='linear-gradient(135deg,#1a4731,#2d7a4f)'">
 
                         <!-- Overlay gelap bawah -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/40"></div>
 
                         <!-- Konten -->
                         <div class="absolute bottom-0 left-0 right-0 px-5 sm:px-8 lg:px-12 pb-10 sm:pb-14">
-                            @if ($slide['kategori'])
+                            @if ($slide->berita->kategoriBerita)
                                 <span
                                     class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold mb-3
-                                    {{ $slide['kategori_slug'] === 'program-kerja' ? 'bg-blue-500 text-white' : 'bg-yellow-400 text-yellow-900' }}">
-                                    {{ $slide['kategori'] }}
+                                    {{ $slide->berita->kategoriBerita->slug === 'program-kerja' ? 'bg-blue-500 text-white' : 'bg-yellow-400 text-yellow-900' }}">
+                                    {{ $slide->berita->kategoriBerita->judul }}
                                 </span>
                             @endif
                             <h2
                                 class="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug max-w-3xl drop-shadow-lg line-clamp-2">
-                                {{ $slide['judul'] }}
+                                {{ $slide->berita->judul }}
                             </h2>
-                            <p
-                                class="hidden sm:block mt-2 text-sm sm:text-base text-white/80 max-w-xl line-clamp-2 leading-relaxed">
-                                {{ $slide['ringkasan'] }}
-                            </p>
-                            @if ($slide['link'])
-                                <a href="{{ $slide['link'] }}"
+                            {{-- <p
+                                class="hidden sm:block mt-2 text-sm sm:text-base !text-white/80 max-w-xl line-clamp-2 leading-relaxed">
+                                {!! \Illuminate\Support\Str::limit($slide->berita->konten, 100) !!}
+                            </p> --}}
+                            @if ($slide->berita->slug)
+                                <a href="{{ route('berita.show', $slide->berita->slug) }}"
                                     class="inline-flex items-center mt-4 px-5 py-2.5 rounded-full bg-primary-dark hover:bg-primary-darker text-white text-sm font-semibold shadow-lg transition-all duration-200 cursor-pointer">
                                     Baca Selengkapnya
                                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,14 +84,14 @@
                 @foreach ($heroSlides as $i => $slide)
                     <button type="button" data-dot="{{ $i }}" aria-label="Slide {{ $i + 1 }}"
                         class="hero-dot rounded-full transition-all duration-300 cursor-pointer
-                               {{ $i === 0 ? 'w-6 h-2 bg-white' : 'w-2 h-2 bg-white/40 hover:bg-white/70' }}">
+                            {{ $i === 0 ? 'w-6 h-2 bg-white' : 'w-2 h-2 bg-white/40 hover:bg-white/70' }}">
                     </button>
                 @endforeach
             </div>
         </section>
 
         <!-- =============================================
-             SAMBUTAN KEPALA MADRASAH + STATISTIK
+            SAMBUTAN KEPALA MADRASAH + STATISTIK
         ============================================= -->
         <section
             class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-sm transition-colors duration-300">
@@ -257,13 +257,12 @@
                     @foreach ($beritaTerbaru as $berita)
                         <article
                             class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md hover:-translate-y-1 overflow-hidden transition-all duration-200">
-                            <a href="{{ route('berita.show', $berita['slug']) }}" class="block cursor-pointer">
+                            <a href="{{ route('berita.show', $berita->slug) }}" class="block cursor-pointer">
                                 <div
                                     class="relative h-44 bg-gradient-to-br from-primary/20 to-green-900/30 dark:from-gray-700 dark:to-gray-600 overflow-hidden">
-                                    @if ($berita['thumbnail'])
-                                        <img src=""
-                                            data-src="{{ asset('images/berita/' . $berita['thumbnail']) }}"
-                                            alt="{{ $berita['judul'] }}"
+                                    @if ($berita->thumbnail)
+                                        <img src="{{ asset('storage/' . $berita->thumbnail) }}"
+                                            alt="{{ $berita->judul }}"
                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                             onerror="this.style.display='none'">
                                     @endif
@@ -271,8 +270,8 @@
                                     <div class="absolute top-3 left-3">
                                         <span
                                             class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold
-                                            {{ $berita['kategori_slug'] === 'program-kerja' ? 'bg-blue-500 text-white' : 'bg-yellow-400 text-yellow-900' }}">
-                                            {{ $berita['kategori'] }}
+                                            {{ $berita->kategoriBerita->slug === 'program-kerja' ? 'bg-blue-500 text-white' : 'bg-yellow-400 text-yellow-900' }}">
+                                            {{ $berita->kategoriBerita->judul }}
                                         </span>
                                     </div>
                                 </div>
@@ -285,26 +284,26 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
-                                        {{ \Carbon\Carbon::parse($berita['tanggal'])->translatedFormat('d M Y') }}
+                                        {{ $berita->tanggal->translatedFormat('d M Y') }}
                                     </span>
-                                    <span class="flex items-center gap-1">
+                                    {{-- <span class="flex items-center gap-1">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                         </svg>
-                                        {{ number_format($berita['views']) }}
-                                    </span>
+                                        {{ number_format($berita->views) }}
+                                    </span> --}}
                                 </div>
-                                <a href="{{ route('berita.show', $berita['slug']) }}" class="cursor-pointer">
+                                <a href="{{ route('berita.show', $berita->slug) }}" class="cursor-pointer">
                                     <h3
                                         class="font-bold text-sm sm:text-base text-gray-900 dark:text-white leading-snug line-clamp-2 group-hover:text-primary-dark dark:group-hover:text-green-400 transition-colors duration-150">
-                                        {{ $berita['judul'] }}
+                                        {{ $berita->judul }}
                                     </h3>
                                 </a>
                                 <p
                                     class="mt-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-2">
-                                    {{ $berita['ringkasan'] }}
+                                    {!! \Illuminate\Support\Str::limit($berita->konten, 50) !!}
                                 </p>
                             </div>
                         </article>
@@ -319,6 +318,65 @@
         <section id="struktur-organisasi" class="hidden"></section>
         <section id="alumni" class="hidden"></section>
     </main>
+    {{-- =============================================
+     POPUP PENGUMUMAN
+     Tambahkan ini di dalam landing2.blade.php
+     tepat sebelum @push('scripts') atau di akhir <main>
+============================================= --}}
+
+    @if (!empty($pengumuman) && $pengumuman->berita?->thumbnail && $pengumuman->aktif)
+        <div id="popupOverlay"
+            class="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity duration-300"
+            onclick="if(event.target===this) tutupPopup()">
+
+            {{-- max-w-sm di desktop agar tidak terlalu besar --}}
+            <div class="relative w-full max-w-xs sm:max-w-sm animate-[fadeSlideUp_0.3s_ease_both]">
+
+                <!-- Tombol tutup -->
+                <button onclick="tutupPopup()" type="button"
+                    class="absolute -top-3 -right-3 z-10 w-9 h-9 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-500 hover:text-gray-900 transition-colors cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <!-- Gambar popup -->
+                <a href="{{ route('berita.show', $pengumuman->berita->slug) }}" onclick="tutupPopup()">
+                    <img src="" data-src="{{ Storage::url($pengumuman->berita->thumbnail) }}"
+                        alt="{{ $pengumuman->berita->judul }}"
+                        class="w-full max-h-[80vh] rounded-2xl shadow-2xl cursor-pointer hover:opacity-95 transition-opacity object-cover">
+                </a>
+
+                <!-- Judul -->
+                <div class="mt-3 text-center px-2">
+                    <a href="{{ route('berita.show', $pengumuman->berita->slug) }}"
+                        class="text-white font-semibold text-sm hover:text-green-300 transition-colors line-clamp-2">
+                        {{ $pengumuman->berita->judul }}
+                    </a>
+                    <p class="text-white/50 text-xs mt-1">Klik gambar untuk membaca selengkapnya</p>
+                </div>
+            </div>
+        </div>
+
+        @push('scripts')
+            <script>
+                // Load gambar popup
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.querySelectorAll('#popupOverlay img[data-src]').forEach(img => {
+                        img.src = img.getAttribute('data-src');
+                    });
+                });
+
+                function tutupPopup() {
+                    const overlay = document.getElementById('popupOverlay');
+                    overlay.style.opacity = '0';
+                    overlay.style.transition = 'opacity 0.3s ease';
+                    setTimeout(() => overlay.style.display = 'none', 300);
+                }
+            </script>
+        @endpush
+    @endif
 
     @push('scripts')
         <script>
@@ -344,8 +402,11 @@
                     let timer;
 
                     function goTo(idx) {
-                        // Cek apakah index valid untuk menghindari error 'undefined'
-                        if (!slides[current] || !slides[idx]) return;
+                        // Hitung index yang sudah di-wrap dulu
+                        const next = (idx + slides.length) % slides.length;
+
+                        // Cek apakah slide valid
+                        if (!slides[current] || !slides[next]) return;
 
                         // Slide lama
                         slides[current].classList.replace('opacity-100', 'opacity-0');
@@ -356,7 +417,7 @@
                             dots[current].classList.add('w-2', 'h-2', 'bg-white/40');
                         }
 
-                        current = (idx + slides.length) % slides.length;
+                        current = next; // ← pakai next yang sudah di-wrap
 
                         // Slide baru
                         slides[current].classList.replace('opacity-0', 'opacity-100');

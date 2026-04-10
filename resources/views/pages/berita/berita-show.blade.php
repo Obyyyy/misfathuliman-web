@@ -12,13 +12,11 @@
                             class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden transition-colors duration-300">
 
                             {{-- Thumbnail hanya ditampilkan di dalam konten, bukan di sini --}}
-
                             <div class="p-6 sm:p-8">
-
                                 <!-- Judul -->
                                 <h1
                                     class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-900 dark:text-white leading-snug">
-                                    {{ $post['judul'] }}
+                                    {{ $post->judul }}
                                 </h1>
 
                                 <!-- Meta info -->
@@ -35,7 +33,7 @@
                                             </svg>
                                         </div>
                                         <span
-                                            class="font-medium text-gray-700 dark:text-gray-300">{{ $post['penulis'] }}</span>
+                                            class="font-medium text-gray-700 dark:text-gray-300">{{ $post->user->name ?? 'Admin Madrasah' }}</span>
                                     </span>
                                     <!-- Tanggal -->
                                     <span class="flex items-center gap-1.5">
@@ -43,7 +41,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
-                                        {{ \Carbon\Carbon::parse($post['tanggal'])->translatedFormat('d F Y') }}
+                                        {{ $post->tanggal->translatedFormat('d F Y') }}
                                     </span>
                                     <!-- Views -->
                                     <span class="flex items-center gap-1.5">
@@ -51,7 +49,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                         </svg>
-                                        {{ number_format($post['views']) }} kali dilihat
+                                        {{ number_format($post->views) }} kali dilihat
                                     </span>
                                 </div>
 
@@ -72,13 +70,12 @@
                                     dark:prose-a:text-green-400">
 
                                     {{-- Tampilkan thumbnail di awal konten jika ada --}}
-                                    @if ($post['thumbnail'])
-                                        <img src="{{ asset('images/' . $post['thumbnail']) }}"
-                                            alt="{{ $post['judul'] }}"
-                                            class="w-[70%] mx-auto rounded-xl shadow-md mb-6 object-cover">
+                                    @if ($post->thumbnail)
+                                        <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->judul }}"
+                                            class="w-[60%] mx-auto rounded-xl shadow-md mb-6 object-cover">
                                     @endif
 
-                                    {!! $post['konten'] !!}
+                                    {!! $post->konten !!}
                                 </div>
 
                                 <!-- Share -->
@@ -87,7 +84,7 @@
                                     <span
                                         class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">Bagikan:</span>
                                     <!-- WhatsApp -->
-                                    <a href="https://wa.me/?text={{ urlencode($post['judul'] . ' ' . url()->current()) }}"
+                                    <a href="https://wa.me/?text={{ urlencode($post->judul . ' ' . url()->current()) }}"
                                         target="_blank" rel="noopener"
                                         class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors duration-150 cursor-pointer">
                                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">

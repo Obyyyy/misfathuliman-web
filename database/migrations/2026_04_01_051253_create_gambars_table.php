@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('gambar', function (Blueprint $table) {
             $table->id();
-            $table->enum('jenis', ['Foto Sekolah', 'Struktur Organisasi']);
+            $table->enum('jenis', ['Foto Sekolah', 'Struktur Organisasi', 'Logo Sekolah']);
             $table->string('gambar')->nullable(); // path file
             $table->timestamps();
         });

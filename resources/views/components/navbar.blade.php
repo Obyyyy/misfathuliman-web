@@ -4,8 +4,8 @@
         <div class="flex items-center justify-between h-16">
             <!-- Left: Logo + Name -->
             <div class="flex items-center space-x-3">
-                <img src="{{ asset('images/miftahuliman-logo.png') }}" alt="Logo MIS Fathul Iman"
-                    class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shadow-sm ">
+                <img src="{{ $logoSekolah->gambar ? asset('storage/' . $logoSekolah->gambar) : '' }}"
+                    alt="Logo MIS Fathul Iman" class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shadow-sm ">
                 <div class="flex flex-col">
                     <span class="text-white font-bold text-lg md:text-2xl leading-tight">
                         <a href="/">MIS FATHUL IMAN</a>
@@ -97,7 +97,7 @@
 
                 <!-- Dark Mode Toggle (Desktop) -->
                 <button id="btnDarkToggleDesktop" type="button" aria-label="Toggle dark mode"
-                    class="relative inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 dark:bg-white/5 dark:hover:bg-white/15 text-white transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
+                    class="relative hover:cursor-pointer inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 dark:bg-white/5 dark:hover:bg-white/15 text-white transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
                     <!-- Sun icon (shown in dark mode) -->
                     <svg id="iconSunDesktop" class="hidden w-5 h-5" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24" aria-hidden="true">

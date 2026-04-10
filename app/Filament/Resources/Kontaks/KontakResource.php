@@ -22,7 +22,7 @@ class KontakResource extends Resource
     protected static ?string $breadcrumb = 'Kontak';
     protected static ?string $slug = 'kontak';
     protected static ?string $navigationLabel = 'Kontak';
-    protected static string|UnitEnum|null $navigationGroup = 'Profil';
+    protected static string|UnitEnum|null $navigationGroup = 'Profil Sekolah';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhone;
 
     public static function form(Schema $schema): Schema

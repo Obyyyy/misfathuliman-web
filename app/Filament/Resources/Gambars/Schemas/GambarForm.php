@@ -13,7 +13,7 @@ class GambarForm
         return $schema
             ->components([
                 Select::make('jenis')
-                    ->options(['Foto Sekolah' => 'Foto Sekolah', 'Struktur Organisasi' => 'Struktur Organisasi'])
+                    ->options(['Foto Sekolah' => 'Foto Sekolah', 'Struktur Organisasi' => 'Struktur Organisasi', 'Logo Sekolah' => 'Logo Sekolah'])
                     ->required()
                     ->disabled(),
                 FileUpload::make('gambar')

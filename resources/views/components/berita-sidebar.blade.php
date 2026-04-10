@@ -8,18 +8,18 @@
     </div>
     <div class="divide-y divide-gray-100 dark:divide-gray-700">
         @foreach ($kategoriList as $kat)
-            <a href="{{ route('berita.index', ['kategori' => $kat['slug']]) }}"
+            <a href="{{ route('berita.index', ['kategori' => $kat->slug]) }}"
                 class="flex items-center justify-between px-5 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-700 hover:text-primary-dark dark:hover:text-green-400 transition-colors duration-150 cursor-pointer group">
                 <span class="flex items-center gap-2">
                     <span
                         class="w-2 h-2 rounded-full
-                        {{ $kat['slug'] === 'program-kerja' ? 'bg-blue-400' : 'bg-yellow-400' }}">
+                        {{ $kat->slug === 'program-kerja' ? 'bg-blue-400' : 'bg-yellow-400' }}">
                     </span>
-                    {{ $kat['nama'] }}
+                    {{ $kat->judul }}
                 </span>
                 <span
                     class="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 group-hover:bg-primary-dark group-hover:text-white dark:group-hover:bg-green-600 transition-colors duration-150">
-                    {{ $kat['jumlah'] }}
+                    {{ $kat->berita->count() }}
                 </span>
             </a>
         @endforeach
@@ -39,8 +39,8 @@
                 <!-- Thumbnail kecil -->
                 <div
                     class="w-16 h-14 rounded-lg overflow-hidden bg-gradient-to-br from-primary/20 to-primary-dark/30 dark:from-gray-700 dark:to-gray-600 flex-shrink-0">
-                    @if ($p['thumbnail'])
-                        <img src="{{ asset('images/berita/' . $p['thumbnail']) }}" alt="{{ $p['judul'] }}"
+                    @if ($p->thumbnail)
+                        <img src="{{ asset('storage/' . $p->thumbnail) }}" alt="{{ $p->judul }}"
                             class="w-full h-full object-cover" onerror="this.style.display='none'">
                     @endif
                 </div>
@@ -48,14 +48,14 @@
                 <div class="flex-1 min-w-0">
                     <p
                         class="text-xs sm:text-sm font-semibold text-gray-800 dark:text-gray-200 group-hover:text-primary-dark dark:group-hover:text-green-400 line-clamp-2 leading-snug transition-colors duration-150">
-                        {{ $p['judul'] }}
+                        {{ $p->judul }}
                     </p>
                     <p class="mt-1 text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1">
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        {{ \Carbon\Carbon::parse($p['tanggal'])->translatedFormat('d M Y') }}
+                        {{ \Carbon\Carbon::parse($p->tanggal)->translatedFormat('d M Y') }}
                     </p>
                 </div>
             </a>

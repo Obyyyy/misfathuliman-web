@@ -11,6 +11,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
+use UnitEnum;
 
 class TahunAjaran extends Page implements HasForms
 {
@@ -19,6 +20,10 @@ class TahunAjaran extends Page implements HasForms
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calendar-days';
     protected static ?string $navigationLabel = 'Tahun Ajaran';
     protected string $view = 'filament.pages.tahun-ajaran';
+    protected static string|UnitEnum|null $navigationGroup = 'Settings';
+
+    // protected static ?string $navigationGroup = 'Pengaturan';
+    protected static ?int $navigationSort = 100; // ← angka besar = posisi bawah
 
     public string $tahun_ajaran = '';
 

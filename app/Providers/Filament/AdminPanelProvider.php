@@ -2,14 +2,19 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
+use App\Filament\Pages\EditProfilByGuru;
+use App\Models\Gambar;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -27,7 +32,10 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(Login::class)
+            ->brandName('MIS Fathul Iman')
+            // ->brandLogo(asset('storage/' . Gambar::where('jenis', 'Logo Sekolah')->first()->gambar))
+            // ->brandLogoHeight('2.5rem')
             ->colors([
                 'primary' => Color::Emerald,
             ])
@@ -35,6 +43,16 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
+                EditProfilByGuru::class,
+            ])
+            ->navigationGroups([
+                'Guru & Staf',
+                'Postingan Berita',
+                'Profil Sekolah',
+                NavigationGroup::make()
+                    ->label('Settings')
+                    // ->icon(Heroicon::OutlinedCog6Tooth)
+                    ->collapsible(false),
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
@@ -54,6 +72,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->sidebarFullyCollapsibleOnDesktop();
     }
 }

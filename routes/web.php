@@ -29,8 +29,8 @@ Route::get('/siswa', [KelasController::class, 'indexSiswa'])->name('siswa.index'
 // Detail siswa per kelas — contoh URL: /siswa/kelas-6a
 Route::get('/siswa/{slug}', [KelasController::class, 'siswaPerKelas'])->name('siswa.kelas');
 
-Route::get('/berita',        [BeritaController::class, 'index'])->name('berita.index');
-Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
+Route::get('/berita',        [BeritaController::class, 'indexBerita'])->name('berita.index');
+Route::get('/berita/{slug}', [BeritaController::class, 'showBerita'])->name('berita.show');
 
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 Route::post('/kontak/kirim', [KontakController::class, 'kirim'])->name('kontak.kirim');

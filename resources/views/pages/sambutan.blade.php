@@ -187,12 +187,12 @@
                             <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Kepala Madrasah,</p>
 
                             <!-- Placeholder area tanda tangan -->
-                            <div
+                            {{-- <div
                                 class="my-6 w-36 h-16 flex items-center justify-center border border-dashed border-gray-200 dark:border-gray-700 rounded-lg">
                                 <span class="text-xs text-gray-300 dark:text-gray-600 italic">ttd</span>
-                            </div>
+                            </div> --}}
 
-                            <p class="font-extrabold text-sm text-gray-900 dark:text-white">
+                            <p class="font-extrabold text-sm mt-2 text-gray-900 dark:text-white">
                                 {{ $kepala['nama'] }}
                             </p>
                             @if (!empty($kepala['nip']))
