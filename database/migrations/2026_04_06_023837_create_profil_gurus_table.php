@@ -28,7 +28,7 @@ return new class extends Migration
                 'Guru Kelas',
                 'Guru Mata Pelajaran',
                 'Staf',
-            ]);
+            ])->nullable();
             $table->string('nama_jabatan')->nullable()
                 ->comment('Detail jabatan, contoh: Wali Kelas 1A, Mapel PJOK');
             $table->string('no_hp')->nullable();

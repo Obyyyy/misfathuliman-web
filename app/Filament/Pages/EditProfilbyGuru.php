@@ -4,9 +4,10 @@ namespace App\Filament\Pages;
 
 use App\Models\ProfilGuru;
 use BackedEnum;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Section;  // ← versi Anda
@@ -16,10 +17,13 @@ use Illuminate\Support\Facades\Hash;
 
 class EditProfilByGuru extends Page
 {
+    use HasPageShield;
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user-circle';
     protected static ?string $navigationLabel = 'Profil Saya';
     protected static ?int $navigationSort = 99;
     protected string $view = 'filament.pages.edit-profil-by-guru';
+    protected static ?string $title = 'Edit Profil';
 
     public string $name     = '';
     public string $email    = '';
@@ -40,7 +44,7 @@ class EditProfilByGuru extends Page
 
         $this->name  = $user->name;
         $this->username = $user->username;
-        $this->email = $user->email;
+        $this->email = $user->email? $user->email : '';
         $this->foto = $user->foto ? [$user->foto] : null;
 
         if ($profil) {
@@ -91,6 +95,9 @@ class EditProfilByGuru extends Page
                         ->label('Foto Profil')
                         ->image()
                         ->imagePreviewHeight(150)
+                        ->maxSize(1024)
+                        ->openable()
+                        ->deletable(false)
                         ->disk('public')
                         ->directory('foto_guru')
                         ->visibility('public')

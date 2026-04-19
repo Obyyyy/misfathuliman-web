@@ -28,6 +28,16 @@ class ProfilGurusTable
                     ->searchable()
                     ->copyable(), // klik untuk copy
                     // ->prefix('@'),
+                TextColumn::make('roles.name')
+                    ->label('Role Akun')
+                    ->badge()
+                    ->color(fn($state) => match ($state) {
+                        'super_admin' => 'danger',
+                        'admin'       => 'warning',
+                        'guru_staf'        => 'info',
+                        default       => 'gray',
+                    })
+                    ->separator(','),
                 // TextColumn::make('profilGuru.nip')
                 //     ->label('NIP')
                 //     ->searchable(),
@@ -43,7 +53,8 @@ class ProfilGurusTable
                 TextColumn::make('profilGuru.no_hp')
                     ->label('No Hp')
                     ->searchable()
-                    ->placeholder('-'),
+                    ->placeholder('-')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

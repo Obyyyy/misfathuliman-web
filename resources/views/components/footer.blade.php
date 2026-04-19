@@ -59,8 +59,11 @@
                         </div>
                         <div>
                             <p class="font-semibold text-gray-100 dark:text-white">Telepon</p>
+
                             <p class="text-gray-300 dark:text-gray-400">
-                                {{ $kontakFooter->get('Telepon')?->value ?? '-' }}
+                                <a href="https://wa.me/{{ $kontakFooter->get('Telepon')?->value ?? '089512198092' }}?text=Assalamualaikum%20Warahmatullahi%20Wabarakatuh%0A%0APerkenalkan,%20nama%20saya%20[Nama].%20Saya%20ingin%20bertanya%20mengenai%20[keperluan/pertanyaan].%0A%0AMohon%20informasi%20lebih%20lanjut.%20Terima%20kasih."
+                                    target="_blank" rel="noopener noreferrer" aria-label="WhatsApp MIS Fathul Iman">
+                                    {{ $kontakFooter->get('Telepon')?->value ?? '-' }} </a>
                             </p>
                         </div>
                     </div>
@@ -121,8 +124,9 @@
                     </a>
 
                     <!-- WhatsApp -->
-                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
-                        aria-label="WhatsApp MIS Fathul Iman"
+                    <a href="https://wa.me/{{ $kontakFooter->get('Telepon')?->value ?? '089512198092' }}?text=Assalamualaikum%20Warahmatullahi%20Wabarakatuh%0A%0APerkenalkan,%20nama%20saya%20[Nama].%20Saya%20ingin%20bertanya%20mengenai%20[keperluan/pertanyaan].%0A%0AMohon%20informasi%20lebih%20lanjut.%20Terima%20kasih."
+                        target="_blank" rel="noopener noreferrer" aria-label="WhatsApp MIS Fathul Iman" target="_blank"
+                        rel="noopener noreferrer" aria-label="WhatsApp MIS Fathul Iman"
                         class="group flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-primary dark:bg-gray-800 hover:bg-green-500 dark:hover:bg-green-500 text-gray-100 dark:text-gray-400 hover:text-white transition-all duration-200 shadow-sm hover:shadow-md">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path

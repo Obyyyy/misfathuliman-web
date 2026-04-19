@@ -35,7 +35,7 @@
 
                             <!-- Detail identitas — gunakan tabel agar tidak tumpang tindih -->
                             <div class="divide-y divide-gray-100 dark:divide-gray-700">
-                                @foreach ([['Status', 'Swasta Terakreditasi B'], ['Jenjang', 'Madrasah Ibtidaiyah (SD)'], ['Berdiri', '2013'], ['NPSN', '69854296'], ['Kota', 'Palangka Raya, Kalteng'], ['Siswa', '550+ siswa aktif'], ['Guru & Staff', '25+ orang']] as [$label, $value])
+                                @foreach ([['Status', 'Swasta Terakreditasi B'], ['Jenjang', 'Madrasah Ibtidaiyah (SD)'], ['Berdiri', '2013'], ['NPSN', '69854296'], ['Kota', 'Palangka Raya, Kalteng'], ['Siswa', $jumlahSiswa . ' Siswa'], ['Guru & Staff', $jumlahGuru . ' Orang']] as [$label, $value])
                                     <div class="flex items-start justify-between gap-3 px-5 py-3 text-xs sm:text-sm">
                                         <span
                                             class="text-gray-500 dark:text-gray-400 flex-shrink-0 min-w-0">{{ $label }}</span>

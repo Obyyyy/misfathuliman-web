@@ -31,10 +31,10 @@ class VisiMisiResource extends Resource
     // protected ?string $heading = 'Custom Page Heading';
     // protected ?string $subheading = 'Berikut daftar Visi dan Misi';
 
-    public static function getRecordTitleAttribute(): ?string
-    {
-        return 'judul';
-    }
+    // public static function getRecordTitleAttribute(): ?string
+    // {
+    //     return 'judul';
+    // }
 
 
     public static function form(Schema $schema): Schema

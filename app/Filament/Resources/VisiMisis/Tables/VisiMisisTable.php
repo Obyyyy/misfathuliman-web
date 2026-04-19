@@ -19,6 +19,7 @@ class VisiMisisTable
                     ->color(fn (string $state): string => match ($state) {
                         'Visi' => 'success',
                         'Misi' => 'info',
+                        'Tujuan' => 'primary'
                     }),
                 TextColumn::make('judul')
                     ->searchable()

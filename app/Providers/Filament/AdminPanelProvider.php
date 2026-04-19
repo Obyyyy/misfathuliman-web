@@ -2,21 +2,22 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\AbsensiPage;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\EditProfilByGuru;
-use App\Models\Gambar;
+use App\Filament\Widgets\AdminRekapAbsensiWidget;
+use App\Filament\Widgets\AdminStatsWidget;
+use App\Filament\Widgets\GuruWelcomeWidget;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use BezhanSalleh\FilamentShield\Middleware\SyncShieldTenant;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Support\Icons\Heroicon;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -42,8 +43,9 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
-                Dashboard::class,
+                \App\Filament\Pages\Dashboard::class,
                 EditProfilByGuru::class,
+                AbsensiPage::class,
             ])
             ->navigationGroups([
                 'Guru & Staf',
@@ -56,8 +58,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                AdminStatsWidget::class,
+                AdminRekapAbsensiWidget::class,
+                GuruWelcomeWidget::class,
+                // AccountWidget::class,
+                // FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -70,9 +75,28 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->sidebarCollapsibleOnDesktop()
+            ->plugins([
+                FilamentShieldPlugin::make()
+                    ->gridColumns([
+                        'default' => 1,
+                        'sm'      => 2,
+                        'lg'      => 3,
+                    ])
+                    ->sectionColumnSpan(1)
+                    ->checkboxListColumns([
+                        'default' => 1,
+                        'sm'      => 2,
+                    ])
+                    ->resourceCheckboxListColumns([
+                        'default' => 1,
+                        'sm'      => 2,
+                    ]),
+            ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->sidebarFullyCollapsibleOnDesktop();
+                SyncShieldTenant::class,
+            ])->authGuard('web')
+            ->loginRouteSlug('masuk');
     }
 }

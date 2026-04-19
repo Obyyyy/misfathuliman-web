@@ -5,7 +5,6 @@ namespace App\Filament\Resources\ProfilGurus;
 use App\Filament\Resources\ProfilGurus\Pages\CreateProfilGuru;
 use App\Filament\Resources\ProfilGurus\Pages\EditProfilGuru;
 use App\Filament\Resources\ProfilGurus\Pages\ListProfilGurus;
-use App\Filament\Resources\ProfilGurus\Pages\ViewProfilGuru;
 use App\Filament\Resources\ProfilGurus\Schemas\ProfilGuruForm;
 use App\Filament\Resources\ProfilGurus\Schemas\ProfilGuruInfolist;
 use App\Filament\Resources\ProfilGurus\Tables\ProfilGurusTable;
@@ -21,7 +20,7 @@ class ProfilGuruResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedIdentification;
     protected static string|UnitEnum|null $navigationGroup = 'Guru & Staf';
     protected static ?string $slug = 'guru-staf';
     protected static ?string $navigationLabel = 'Data Guru';
@@ -30,7 +29,7 @@ class ProfilGuruResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        return static::getModel()::role(['admin', 'guru_staf', 'super_admin'])->count();
     }
 
     public static function form(Schema $schema): Schema

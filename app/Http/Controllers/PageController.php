@@ -11,10 +11,8 @@ use App\Models\Pengumuman;
 use App\Models\Setting;
 use App\Models\Siswa;
 use App\Models\SlideShow;
+use App\Models\User;
 use App\Models\VisiMisi;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
@@ -22,7 +20,7 @@ class PageController extends Controller
         $tahun = Setting::get('tahun_ajaran', '2025');
         $jumlahSiswa = Siswa::where('kelas_id', 'like',$tahun.'%')->count();
         $jumlahKelas = Kelas::where('kelas_id', 'like',$tahun.'%')->count();
-        $jumlahGuru = Guru::where('guru_aktif', 1)->count();
+        $jumlahGuru = User::with('roles')->whereHas('roles', fn($q) => $q->where('name', 'guru_staf'))->count();
 
         $statistik = [
             ['angka' => $jumlahGuru,  'label' => 'Guru & Staf'],
@@ -30,11 +28,7 @@ class PageController extends Controller
             ['angka' => $jumlahKelas,  'label' => 'Rombel'],
         ];
 
-        $kepala = [
-            'nama'     => 'Marjuki, M.Pd',
-            // 'nip'      => 'NIP. 19XX0101 XXXX XX X XXX',
-            'sambutan' => 'Assalamu\'alaikum Warahmatullahi Wabarakatuh. Puji syukur kehadirat Allah SWT yang telah memberikan rahmat dan hidayah-Nya. Selamat datang di website resmi MIS Fathul Iman Palangka Raya. Madrasah kami berkomitmen memberikan pendidikan terbaik yang memadukan ilmu pengetahuan dan nilai keislaman demi mencetak generasi Qur\'ani yang cerdas dan berakhlak mulia.',
-        ];
+        $kepalaMadrasah = User::with('profilGuru')->whereHas('profilGuru', fn($q) => $q->where('nama_jabatan', 'Kepala Madrasah'))->first();
 
         $heroSlides = SlideShow::with('berita')->orderBy('urutan')->get();
 
@@ -44,8 +38,8 @@ class PageController extends Controller
                 ->get();
         $gambarSekolah = Gambar::where('jenis', 'Foto Sekolah')->first();
         $pengumuman = Pengumuman::first();
-        return view('landing', compact('heroSlides', 'kepala', 'statistik', 'beritaTerbaru', 'gambarSekolah', 'pengumuman'));
-        // return view('landing', compact('beritaTerbaru'));
+
+        return view('landing', compact('heroSlides', 'statistik', 'beritaTerbaru', 'gambarSekolah', 'pengumuman', 'kepalaMadrasah'));
     }
 
     public function profile() {
@@ -56,7 +50,12 @@ class PageController extends Controller
             ['label' => 'Profil', 'url' => ''],
             ['label' => 'Profil Sekolah', 'url' => ''],
         ];
-        return view('pages.profile', compact('title', 'subtitle', 'breadcrumbs'));
+
+        $tahun = Setting::get('tahun_ajaran', '2025');
+        $jumlahSiswa = Siswa::where('kelas_id', 'like',$tahun.'%')->count();
+        $jumlahGuru = User::with('roles')->whereHas('roles', fn($q) => $q->where('name', 'guru_staf'))->count();
+
+        return view('pages.profile', compact('title', 'subtitle', 'breadcrumbs', 'jumlahSiswa', 'jumlahGuru'));
     }
 
     public function sejarah() {
@@ -83,7 +82,9 @@ class PageController extends Controller
 
         $visi = VisiMisi::where('jenis', 'Visi')->first();
         $misi = VisiMisi::where('jenis', 'Misi')->get();
-        return view('pages.visi-misi', compact('title', 'subtitle', 'breadcrumbs', 'visi', 'misi'));
+        $tujuan = VisiMisi::where('jenis', 'Tujuan')->first();
+
+        return view('pages.visi-misi', compact('title', 'subtitle', 'breadcrumbs', 'visi', 'misi', 'tujuan'));
     }
 
     public function stafPengajar() {
@@ -94,7 +95,12 @@ class PageController extends Controller
             ['label' => 'Profil', 'url' => ''],
             ['label' => 'Guru & Tata Usaha', 'url' => ''],
         ];
-        return view('pages.staf-guru', compact('title', 'subtitle', 'breadcrumbs'));
+        $guruKelas = User::with('profilGuru')->whereHas('profilGuru', fn($q) => $q->where('jabatan', 'Guru Kelas'))->orderBy('name')->get();
+        $guruMapel = User::with('profilGuru')->whereHas('profilGuru', fn($q) => $q->where('jabatan', 'Guru Mata Pelajaran'))->orderBy('name')->get();
+        $stafSekolah = User::with('profilGuru')->whereHas('profilGuru', fn($q) => $q->where('jabatan', 'Staf'))->orderBy('name')->get();
+        $kepalaMadrasah = User::with('profilGuru')->whereHas('profilGuru', fn($q) => $q->where('jabatan', 'Kepala Madrasah'))->orderBy('name')->first();
+
+        return view('pages.staf-guru', compact('title', 'subtitle', 'breadcrumbs', 'guruKelas', 'guruMapel', 'stafSekolah', 'kepalaMadrasah'));
     }
 
     public function kerjasama() {
@@ -111,11 +117,9 @@ class PageController extends Controller
     }
 
     public function sambutan()  {
-        $kepala = [
-            // 'nip'   => 'NIP. 19XX0101 XXXX XX X XXX',
-            'nama'  => 'Marjuki, M.Pd',
-        ];
-        return view('pages.sambutan', compact('kepala'));
+        $kepalaMadrasah = User::with('profilGuru')->whereHas('profilGuru', fn($q) => $q->where('nama_jabatan', 'Kepala Madrasah'))->first();
+
+        return view('pages.sambutan', compact('kepalaMadrasah'));
     }
 
     public function strukturOrganisasi()

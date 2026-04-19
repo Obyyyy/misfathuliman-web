@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('visi_misis', function (Blueprint $table) {
             $table->id();
-            $table->enum('jenis', ['Visi', 'Misi']);
+            $table->enum('jenis', ['Visi', 'Misi', 'Tujuan']);
             $table->string('judul');
             $table->text('deskripsi');
             $table->timestamps();

@@ -1,65 +1,75 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
+use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\Gambar;
-use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class GambarPolicy
 {
-    /**
-     * Create a new policy instance.
-     */
-    public function viewAny(User $user): bool
+    use HandlesAuthorization;
+    
+    public function viewAny(AuthUser $authUser): bool
     {
-        return true;
+        return $authUser->can('ViewAny:Gambar');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Gambar $gambar): bool
+    public function view(AuthUser $authUser, Gambar $gambar): bool
     {
-        return true;
+        return $authUser->can('View:Gambar');
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
+    public function create(AuthUser $authUser): bool
     {
-        return false;
+        return $authUser->can('Create:Gambar');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Gambar $gambar): bool
+    public function update(AuthUser $authUser, Gambar $gambar): bool
     {
-        return true;
+        return $authUser->can('Update:Gambar');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Gambar $gambar): bool
+    public function delete(AuthUser $authUser, Gambar $gambar): bool
     {
-        return false;
+        return $authUser->can('Delete:Gambar');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Gambar $gambar): bool
+    public function deleteAny(AuthUser $authUser): bool
     {
-        return false;
+        return $authUser->can('DeleteAny:Gambar');
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Gambar $gambar): bool
+    public function restore(AuthUser $authUser, Gambar $gambar): bool
     {
-        return false;
+        return $authUser->can('Restore:Gambar');
     }
+
+    public function forceDelete(AuthUser $authUser, Gambar $gambar): bool
+    {
+        return $authUser->can('ForceDelete:Gambar');
+    }
+
+    public function forceDeleteAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('ForceDeleteAny:Gambar');
+    }
+
+    public function restoreAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('RestoreAny:Gambar');
+    }
+
+    public function replicate(AuthUser $authUser, Gambar $gambar): bool
+    {
+        return $authUser->can('Replicate:Gambar');
+    }
+
+    public function reorder(AuthUser $authUser): bool
+    {
+        return $authUser->can('Reorder:Gambar');
+    }
+
 }

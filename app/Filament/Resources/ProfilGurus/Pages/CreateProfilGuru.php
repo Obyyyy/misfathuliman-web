@@ -18,4 +18,15 @@ class CreateProfilGuru extends CreateRecord
     {
         return 'Data berhasil ditambahkan';
     }
+
+    protected function afterCreate(): void
+    {
+        $this->dispatch('close-modal', id: 'create-profil-guru');
+    }
+
+    protected function handleRecordCreation(array $data): \Illuminate\Database\Eloquent\Model
+    {
+        $record = parent::handleRecordCreation($data);
+        return $record;
+    }
 }

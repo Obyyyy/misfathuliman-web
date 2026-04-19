@@ -132,7 +132,7 @@
 
                     <div
                         class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 sm:p-8 shadow-sm space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                        <p>
+                        {{-- <p>
                             Mengacu pada visi dan misi yang telah ditetapkan, MIS Fathul Iman bertujuan untuk
                             menghasilkan lulusan yang memiliki keseimbangan antara kecerdasan intelektual
                             (<span class="font-semibold text-primary-dark dark:text-green-400">IQ</span>),
@@ -141,18 +141,8 @@
                             dan kecerdasan spiritual (<span
                                 class="font-semibold text-primary-dark dark:text-green-400">SQ</span>)
                             — yang dikenal sebagai insan kamil dalam pandangan Islam.
-                        </p>
-                        <p>
-                            Setiap lulusan diharapkan tidak hanya mampu bersaing di jenjang pendidikan selanjutnya,
-                            tetapi juga menjadi individu yang berintegritas, berjiwa sosial tinggi, dan senantiasa
-                            menjunjung nilai-nilai Islam dalam setiap aspek kehidupannya.
-                        </p>
-                        <p>
-                            Dengan demikian, MIS Fathul Iman berkeyakinan bahwa pendidikan sejati bukan sekadar
-                            transfer ilmu pengetahuan, melainkan pembentukan karakter dan jiwa yang utuh — menjadikan
-                            setiap siswa sebagai generasi Qur'ani yang siap memberi manfaat bagi agama, bangsa,
-                            dan peradaban.
-                        </p>
+                        </p> --}}
+                        <p>{{ $tujuan->deskripsi }}</p>
                     </div>
                 </div>
 

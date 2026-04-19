@@ -11,8 +11,8 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/sambutan', [PageController::class, 'sambutan'])->name("sambutan");
 Route::get('/struktur-organisasi', [PageController::class, 'strukturOrganisasi'])->name("strukturOrganisasi");
 
-Route::get('/alumni', [PageController::class, 'indexAlumni'])->name('alumni.index');
-Route::get('/alumni/{tahun}', [PageController::class, 'alumniPerTahun'])->name('alumni.tahun');
+// Route::get('/alumni', [PageController::class, 'indexAlumni'])->name('alumni.index');
+// Route::get('/alumni/{tahun}', [PageController::class, 'alumniPerTahun'])->name('alumni.tahun');
 
 Route::get('/profile', [PageController::class, 'profile'])->name("profile");
 

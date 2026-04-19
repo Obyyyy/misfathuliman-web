@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ProfilGurus\Schemas;
 
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -36,7 +37,7 @@ class ProfilGuruForm
                     TextInput::make('email')
                         ->label('Email')
                         ->email()
-                        ->required()
+                        // ->required()
                         ->unique(ignoreRecord: true)
                         ->maxLength(255),
                     TextInput::make('password')
@@ -47,10 +48,24 @@ class ProfilGuruForm
                         ->dehydrated(fn($state) => filled($state))
                         ->required(fn(string $operation) => $operation === 'create')
                         ->helperText('Kosongkan jika tidak ingin mengubah password'),
+                    CheckboxList::make('roles')
+                        ->relationship('roles', 'name')
+                        ->label('Role User')
+                        // ->searchable()
+                        // ->preload()
+                        ->getOptionLabelFromRecordUsing(fn($record) => match($record->name) {
+                            'super_admin' => 'Super Admin',
+                            'admin'       => 'Admin',
+                            'guru_staf'   => 'Guru & Staf',
+                            'humas'       => 'Humas',
+                            default       => ucfirst($record->name),
+                        })
+                        ->required(),
                     FileUpload::make('foto')
                         ->label('Foto Profil')
                         ->image()
                         ->imagePreviewHeight(150)
+                        ->maxSize(1024)
                         ->disk('public')
                         ->directory('foto_guru')
                         ->visibility('public')
@@ -82,9 +97,8 @@ class ProfilGuruForm
                             'Wakil Kepala Madrasah' => 'Wakil Kepala Madrasah',
                             'Guru Kelas'            => 'Guru Kelas',
                             'Guru Mata Pelajaran'   => 'Guru Mata Pelajaran',
-                            'Staf Tata Usaha'       => 'Staf Tata Usaha',
+                            'Staf'       => 'Staf Sekolah',
                         ])
-                        ->required()
                         ->live(),
                     TextInput::make('nama_jabatan')
                         ->label('Detail Jabatan')

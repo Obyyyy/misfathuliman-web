@@ -14,7 +14,7 @@ class VisiMisiForm
         return $schema
             ->components([
                 Select::make('jenis')
-                    ->options(['Visi' => 'Visi', 'Misi' => 'Misi'])
+                    ->options(['Visi' => 'Visi', 'Misi' => 'Misi', 'Tujuan' => 'Tujuan'])
                     ->required(),
                 TextInput::make('judul')
                     ->required(),

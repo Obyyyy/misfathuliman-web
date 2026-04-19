@@ -26,10 +26,10 @@
         <!-- Ikon & Nama -->
         <div class="flex items-start space-x-4">
             <!-- Ikon -->
-            <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 {{ $iconBg }}">
+            <div class="w-15 h-15 rounded-xl flex items-center justify-center flex-shrink-0 {{ $iconBg }}">
                 @if ($mitra['ikon_gambar'])
                     <img src="{{ asset('storage/' . $mitra['ikon_gambar']) }}" alt="Logo {{ $mitra['nama'] }}"
-                        class="w-7 h-7 object-contain">
+                        class="w-10 h-10 object-contain">
                 @else
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -48,10 +48,9 @@
                 </span>
             </div>
         </div>
-
         <!-- Deskripsi -->
-        <p class="mt-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex-1">
+        {{-- <p class="mt-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex-1">
             {{ $mitra['deskripsi'] }}
-        </p>
+        </p> --}}
     </div>
 </div>

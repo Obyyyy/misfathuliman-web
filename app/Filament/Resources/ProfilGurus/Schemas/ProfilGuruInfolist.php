@@ -13,9 +13,18 @@ class ProfilGuruInfolist
             ->components([
                 TextEntry::make('name')
                     ->label('User'),
-                TextEntry::make('profilGuru.nip')
-                    ->label('NIP')
-                    ->placeholder('-'),
+                TextEntry::make('roles.name')
+                    ->label('Role')
+                    ->badge()
+                    ->color(fn($state) => match ($state) {
+                        'super_admin' => 'danger',
+                        'admin'       => 'warning',
+                        'guru_staf'        => 'info',
+                        default       => 'gray',
+                    }),
+                // TextEntry::make('profilGuru.nip')
+                //     ->label('NIP')
+                //     ->placeholder('-'),
                 TextEntry::make('profilGuru.pendidikan')
                     ->label('Pendidikan')
                     ->badge(),

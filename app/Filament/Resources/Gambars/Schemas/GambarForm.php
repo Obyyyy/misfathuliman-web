@@ -20,6 +20,7 @@ class GambarForm
                     ->image()
                     ->imagePreviewHeight(250)
                     ->required()
+                    ->maxSize(1024)
                     ->disk('public')
                     ->directory('foto_sekolah')
                     ->visibility('public')

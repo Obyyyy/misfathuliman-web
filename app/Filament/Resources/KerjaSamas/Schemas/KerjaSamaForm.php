@@ -27,6 +27,7 @@ class KerjaSamaForm
                 FileUpload::make('ikon_gambar')
                     ->image()
                     ->imagePreviewHeight(250)
+                    ->maxSize(1024)
                     ->disk('public')
                     ->directory('ikon_mitra')
                     ->visibility('public')

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kerja_sama', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('deskripsi');
+            $table->string('deskripsi')->nullable();
             $table->enum('label', ['Instansi Pemerintah', 'Perusahaan', 'Yayasan/Organisasi', 'Lembaga Pendidikan', 'Media/Komunikasi', 'Layanan Kesehatan']);
             $table->string('ikon_gambar')->nullable();
             $table->timestamps();

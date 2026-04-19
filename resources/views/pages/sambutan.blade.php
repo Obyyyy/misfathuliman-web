@@ -183,7 +183,7 @@
                         <!-- Tanda tangan -->
                         <div
                             class="mt-10 flex flex-col items-end text-right border-t border-gray-100 dark:border-gray-800 pt-8">
-                            <p class="text-xs text-gray-400 dark:text-gray-500">Palangka Raya, 2025</p>
+                            <p class="text-xs text-gray-400 dark:text-gray-500">Palangka Raya, 2026</p>
                             <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Kepala Madrasah,</p>
 
                             <!-- Placeholder area tanda tangan -->
@@ -193,11 +193,11 @@
                             </div> --}}
 
                             <p class="font-extrabold text-sm mt-2 text-gray-900 dark:text-white">
-                                {{ $kepala['nama'] }}
+                                {{ $kepala->name }}
                             </p>
-                            @if (!empty($kepala['nip']))
+                            {{-- @if (!empty($kepala['nip']))
                                 <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{{ $kepala['nip'] }}</p>
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
                 </div>

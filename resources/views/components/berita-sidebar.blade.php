@@ -7,13 +7,17 @@
         <h3 class="font-extrabold text-sm text-gray-900 dark:text-white">Kategori</h3>
     </div>
     <div class="divide-y divide-gray-100 dark:divide-gray-700">
-        @foreach ($kategoriList as $kat)
+        @foreach ($kategoriList as $index => $kat)
             <a href="{{ route('berita.index', ['kategori' => $kat->slug]) }}"
                 class="flex items-center justify-between px-5 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 dark:hover:bg-gray-700 hover:text-primary-dark dark:hover:text-green-400 transition-colors duration-150 cursor-pointer group">
                 <span class="flex items-center gap-2">
                     <span
                         class="w-2 h-2 rounded-full
-                        {{ $kat->slug === 'program-kerja' ? 'bg-blue-400' : 'bg-yellow-400' }}">
+                        {{ match ($index % 3) {
+                            0 => 'bg-blue-400',
+                            1 => 'bg-yellow-400',
+                            2 => 'bg-green-400',
+                        } }}">
                     </span>
                     {{ $kat->judul }}
                 </span>

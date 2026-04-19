@@ -25,21 +25,21 @@ class EditVisiMisi extends EditRecord
         return $this->getResource()::getUrl('index');
     }
 
-    public function getTitle(): string
-    {
-        $name = $this->record?->judul ?? '-';
-        return 'Edit Data "' . ($name ? Str::limit($name, 30).'"' : '');
-    }
+    // public function getTitle(): string
+    // {
+    //     $name = $this->record?->judul ?? '-';
+    //     return 'Edit Data "' . ($name ? Str::limit($name, 30).'"' : '');
+    // }
 
-    public function getBreadcrumbs(): array
-    {
-        $name = $this->record?->judul ?? '—';
-        return [
-            route('filament.admin.resources.visi-misi.index') => 'Visi & Misi',
-            Str::limit($name, 25),
-            'Edit'
-        ];
-    }
+    // public function getBreadcrumbs(): array
+    // {
+    //     $name = $this->record?->judul ?? '—';
+    //     return [
+    //         route('filament.admin.resources.visi-misi.index') => 'Visi & Misi',
+    //         Str::limit($name, 25),
+    //         'Edit'
+    //     ];
+    // }
 
     protected function getSavedNotificationTitle(): ?string
     {

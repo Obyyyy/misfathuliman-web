@@ -3,16 +3,22 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -52,7 +58,30 @@ class User extends Authenticatable
 
     public function profilGuru(): HasOne
     {
-        return $this->hasOne(ProfilGuru::class);
+        return $this->hasOne(ProfilGuru::class, 'user_id', 'id');
+    }
+
+    public function absensi(): HasMany
+    {
+        return $this->hasMany(Absensi::class, 'user_id', 'id');
+    }
+
+    public function absensiHariIni(): HasOne
+    {
+        return $this->hasOne(Absensi::class, 'user_id', 'id')
+            ->where('tanggal', today());
+    }
+
+    // Relasi dinamis untuk tanggal tertentu (dipakai di widget)
+    // public function absensiPadaTanggal(string $tanggal): HasOne
+    // {
+    //     return $this->hasOne(Absensi::class, 'user_id', 'id')
+    //         ->where('tanggal', $tanggal);
+    // }
+
+    public function absensiTanggal(): HasOne
+    {
+        return $this->hasOne(Absensi::class, 'user_id', 'id');
     }
 
     // Helper: URL foto profil, fallback ke avatar inisial
@@ -79,4 +108,15 @@ class User extends Authenticatable
             }
         });
     }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->hasAnyRole(['super_admin', 'admin', 'guru_staf', 'humas']);
+    }
+
+    // public function roles()
+    // {
+    //     return $this->belongsToMany(Role::class);
+    //     // or however your roles table is structured
+    // }
 }

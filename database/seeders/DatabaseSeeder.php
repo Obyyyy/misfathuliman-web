@@ -20,9 +20,11 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Obyy',
+            'name' => 'Muhammad Qalby, S.Kom',
             'email' => 'asborn27@gmail.com',
-            'password' => Hash::make('Asborn27')
+            'username' => 'Obyy27',
+            'password' => Hash::make('Asborn27'),
+            // 'roles' => 'super_admin'
         ]);
 
         Gambar::insert([
@@ -53,6 +55,8 @@ class DatabaseSeeder extends Seeder
             KontakSeeder::class,
             KerjaSamaSeeder::class,
             BeritaSeeder::class,
+            RoleSeeder::class,
+            AssignRoleSeeder::class,
         ]);
     }
 }

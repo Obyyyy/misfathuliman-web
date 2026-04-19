@@ -123,14 +123,18 @@
                                 Sambutan Kepala Madrasah
                             </p>
                             <p class="font-extrabold text-sm sm:text-base text-gray-900 dark:text-white leading-tight">
-                                {{ $kepala['nama'] }}
+                                {{ $kepalaMadrasah->name }}
                             </p>
-                            @if (!empty($kepala['nip']))
+                            {{-- @if (!empty($kepala['nip']))
                                 <p class="text-xs text-gray-400 dark:text-gray-500 mb-2">{{ $kepala['nip'] }}</p>
-                            @endif
+                            @endif --}}
                             <p
                                 class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3 mt-1">
-                                {{ $kepala['sambutan'] }}
+                                Assalamu\'alaikum Warahmatullahi Wabarakatuh. Puji syukur kehadirat Allah SWT yang telah
+                                memberikan rahmat dan hidayah-Nya. Selamat datang di website resmi MIS Fathul Iman
+                                Palangka Raya. Madrasah kami berkomitmen memberikan pendidikan terbaik yang memadukan
+                                ilmu pengetahuan dan nilai keislaman demi mencetak generasi Qur\'ani yang cerdas dan
+                                berakhlak mulia.
                             </p>
                             <a href="{{ route('sambutan') }}"
                                 class="inline-flex items-center mt-3 px-4 py-2 rounded-full bg-primary-dark dark:bg-green-600 text-white text-xs font-semibold hover:bg-primary-darker dark:hover:bg-green-700 transition-all duration-200 cursor-pointer shadow-sm">
