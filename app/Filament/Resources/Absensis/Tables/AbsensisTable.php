@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -20,6 +21,7 @@ class AbsensisTable
         return $table
             ->columns([
                 TextColumn::make('user.name')
+                    ->label('Nama Pengguna')
                     ->searchable(),
                 TextColumn::make('tanggal')
                     ->date()
@@ -110,6 +112,7 @@ class AbsensisTable
                     ]),
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

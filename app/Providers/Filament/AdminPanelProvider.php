@@ -8,6 +8,7 @@ use App\Filament\Pages\EditProfilByGuru;
 use App\Filament\Widgets\AdminRekapAbsensiWidget;
 use App\Filament\Widgets\AdminStatsWidget;
 use App\Filament\Widgets\GuruWelcomeWidget;
+use App\Filament\Widgets\TanggalFilterWidget;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use BezhanSalleh\FilamentShield\Middleware\SyncShieldTenant;
 use Filament\Http\Middleware\Authenticate;
@@ -15,6 +16,7 @@ use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationGroup;
+use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -44,6 +46,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 \App\Filament\Pages\Dashboard::class,
+                // Dashboard::class,
                 EditProfilByGuru::class,
                 AbsensiPage::class,
             ])
@@ -60,6 +63,7 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 AdminStatsWidget::class,
                 AdminRekapAbsensiWidget::class,
+                TanggalFilterWidget::class,
                 GuruWelcomeWidget::class,
                 // AccountWidget::class,
                 // FilamentInfoWidget::class,

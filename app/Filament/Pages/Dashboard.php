@@ -23,6 +23,8 @@ class Dashboard extends BaseDashboard
 
         if ($role->intersect(['super_admin', 'admin'])->isNotEmpty()) {
             return [
+                GuruWelcomeWidget::class,
+                GuruStatusAbsensiWidget::class,
                 TanggalFilterWidget::class,
                 AdminStatsWidget::class,
                 AdminRekapAbsensiWidget::class,

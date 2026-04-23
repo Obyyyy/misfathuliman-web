@@ -82,19 +82,20 @@
 
                         <div class="space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                             <p>
-                                Madrasah Ibtidaiyah Swasta (MIS) Fathul Iman didirikan pada tahun 1985 atas prakarsa
-                                sejumlah tokoh masyarakat dan ulama setempat yang memiliki kepedulian mendalam terhadap
-                                pendidikan Islam di Kota Palangka Raya, Kalimantan Tengah. Dengan semangat dan tekad
-                                yang
-                                kuat, mereka bersepakat untuk membangun sebuah lembaga pendidikan Islam yang tidak hanya
-                                mengajarkan ilmu agama, tetapi juga ilmu pengetahuan umum secara terpadu.
+                                Madrasah Ibtidaiyah Swasta (MIS) Fathul Iman Kota Palangka Raya didirikan pada tahun
+                                2013 di bawah naungan Yayasan Fathul Iman. Pendirian madrasah ini dilatarbelakangi oleh
+                                kepedulian yayasan, dewan guru, wali murid, serta masyarakat terhadap pentingnya
+                                pendidikan yang mampu mengintegrasikan ilmu pengetahuan umum dengan nilai-nilai
+                                keislaman. Pada saat itu, masyarakat dihadapkan pada pilihan pendidikan yang cenderung
+                                terpisah antara aspek religi dan sains, sehingga diperlukan sebuah lembaga yang mampu
+                                menjembatani keduanya secara seimbang.
                             </p>
                             <p>
-                                Pada masa awal berdirinya, MIS Fathul Iman hanya memiliki beberapa ruang kelas sederhana
-                                dengan jumlah murid yang masih sangat terbatas. Namun berkat dukungan masyarakat sekitar
-                                serta kegigihan para pendiri dan tenaga pengajar, madrasah ini terus berkembang dari
-                                tahun
-                                ke tahun, baik dari segi fasilitas maupun kualitas pendidikannya.
+                                Berdiri di lingkungan Komplek Masjid Fathul Iman, madrasah ini hadir sebagai alternatif
+                                pendidikan yang tidak hanya menekankan pada kecerdasan intelektual, tetapi juga
+                                pembentukan karakter, keimanan, dan akhlakul karimah. Dengan semangat kebersamaan dan
+                                tekad yang kuat, MIS Fathul Iman mulai menjalankan kegiatan pendidikan meskipun dengan
+                                fasilitas yang masih terbatas.
                             </p>
                         </div>
 
@@ -121,18 +122,18 @@
 
                         <div class="space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                             <p>
-                                Memasuki era 1990-an, MIS Fathul Iman mulai menunjukkan perkembangan yang signifikan.
-                                Penambahan ruang kelas baru, laboratorium sederhana, dan perpustakaan menjadi tonggak
-                                penting dalam peningkatan mutu pendidikan. Di era ini pula, madrasah mulai aktif
-                                mengikuti berbagai perlombaan akademik dan keagamaan di tingkat kecamatan maupun
-                                kabupaten, dan berhasil meraih sejumlah penghargaan membanggakan.
+                                Sejak awal berdirinya, MIS Fathul Iman terus mengalami perkembangan yang positif.
+                                Dukungan dari masyarakat serta komitmen tenaga pendidik menjadi faktor utama dalam
+                                meningkatkan kualitas pembelajaran. Secara bertahap, sarana dan prasarana madrasah mulai
+                                ditingkatkan untuk menunjang proses pendidikan yang lebih baik.
                             </p>
                             <p>
-                                Pada dekade 2000-an, madrasah terus berbenah seiring dengan tuntutan zaman. Kurikulum
-                                diperbarui dengan mengintegrasikan teknologi informasi ke dalam proses pembelajaran,
-                                sekaligus memperkuat program hafalan Al-Qur'an dan pembiasaan akhlak mulia. Jumlah
-                                peserta didik pun terus meningkat, mencerminkan kepercayaan masyarakat yang semakin
-                                besar terhadap kualitas pendidikan di MIS Fathul Iman.
+                                Dalam perjalanannya, MIS Fathul Iman juga terus berupaya menyesuaikan diri dengan
+                                perkembangan zaman, baik dari segi kurikulum maupun metode pembelajaran. Integrasi
+                                antara pendidikan agama dan ilmu pengetahuan umum semakin diperkuat, disertai dengan
+                                pembiasaan nilai-nilai religius dan pengembangan karakter peserta didik. Hal ini
+                                menjadikan madrasah semakin dipercaya oleh masyarakat sebagai lembaga pendidikan yang
+                                mampu mencetak generasi yang seimbang antara ilmu dan iman.
                             </p>
                         </div>
 
@@ -158,16 +159,18 @@
 
                         <div class="space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                             <p>
-                                Kini, MIS Fathul Iman telah berdiri selama lebih dari empat dekade dan telah meluluskan
-                                ribuan alumni yang tersebar di berbagai penjuru nusantara. Dengan tenaga pendidik yang
-                                berpengalaman dan berdedikasi tinggi, madrasah terus berkomitmen untuk menjadi lembaga
-                                pendidikan Islam yang unggul, modern, dan berakhlakul karimah.
+                                Saat ini, MIS Fathul Iman Kota Palangka Raya telah berkembang menjadi salah satu lembaga
+                                pendidikan swasta yang terus berkomitmen dalam meningkatkan mutu pendidikan. Berlokasi
+                                di Jl. RTA. Milono Km. 2,5, Kelurahan Langkai, Kecamatan Pahandut, madrasah ini berada
+                                di kawasan strategis yang mudah dijangkau oleh masyarakat.
                             </p>
                             <p>
-                                Berbagai prestasi di bidang akademik, keagamaan, maupun seni dan olahraga terus
-                                diraih oleh para siswa, mengharumkan nama madrasah di tingkat regional bahkan nasional.
-                                MIS Fathul Iman terus melangkah maju, menjawab tantangan zaman sambil tetap berpegang
-                                teguh pada nilai-nilai Islam yang menjadi pondasi berdirinya madrasah ini.
+                                Secara legal, Yayasan Fathul Iman telah disahkan melalui akta notaris oleh Gusti Surya
+                                Hadi Saputra, SH., M.Kn dengan Nomor 03 tanggal 22 Februari 2018, serta memperoleh
+                                pengesahan badan hukum dengan Nomor AHU-00340.AH.02.01 Tahun 2016 tanggal 03 Juni 2016.
+                                Dalam upaya menjaga dan meningkatkan kualitas pendidikan, MIS Fathul Iman juga telah
+                                memperoleh akreditasi B dengan nilai 87 pada tanggal 02 Desember 2018, yang berlaku
+                                hingga 31 Desember 2023.
                             </p>
                         </div>
 

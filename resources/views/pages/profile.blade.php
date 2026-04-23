@@ -58,28 +58,35 @@
                             <div
                                 class="space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                                 <p>
-                                    Madrasah Ibtidaiyah Swasta (MIS) Fathul Iman adalah lembaga pendidikan Islam
-                                    tingkat dasar yang berlokasi di Jl. RTA Milono Km. 2,5 No. 44, Kelurahan Langkai,
-                                    Kecamatan Pahandut, Kota Palangka Raya, Kalimantan Tengah. Sejak berdiri pada
-                                    tahun 1985, madrasah ini telah menjadi salah satu lembaga pendidikan Islam
-                                    terpercaya di kota Palangka Raya yang konsisten mencetak generasi berilmu
-                                    dan berakhlak mulia.
+                                    MIS Fathul Iman Kota Palangka Raya merupakan lembaga pendidikan dasar berbasis Islam
+                                    yang berada di bawah naungan Yayasan Fathul Iman. Didirikan pada tahun 2013,
+                                    madrasah ini hadir sebagai jawaban atas kebutuhan masyarakat akan pendidikan yang
+                                    mampu mengintegrasikan ilmu pengetahuan umum dengan nilai-nilai keislaman secara
+                                    seimbang. Berlokasi di Jl. RTA. Milono Km. 2,5, Komplek Masjid Fathul Iman, madrasah
+                                    ini berada di lingkungan yang strategis dan kondusif untuk kegiatan belajar
+                                    mengajar.
                                 </p>
                                 <p>
-                                    Sebagai madrasah swasta di bawah naungan Kementerian Agama Republik Indonesia,
-                                    MIS Fathul Iman menyelenggarakan pendidikan setara Sekolah Dasar (SD) dengan
-                                    mengintegrasikan kurikulum nasional dan kurikulum berbasis keislaman. Hal ini
-                                    menjadikan para lulusannya tidak hanya cakap secara akademis, tetapi juga
-                                    kuat fondasi agamanya.
+                                    Sejak awal berdirinya, MIS Fathul Iman berfokus pada pembentukan generasi yang tidak
+                                    hanya cerdas secara akademik, tetapi juga memiliki keimanan yang kuat, akhlakul
+                                    karimah, serta keterampilan yang mendukung kehidupan di masa depan. Proses
+                                    pembelajaran dirancang secara aktif, kreatif, dan inovatif, serta dipadukan dengan
+                                    pembiasaan nilai-nilai religius seperti kegiatan ibadah berjamaah, pembelajaran
+                                    Al-Qur’an, dan penguatan karakter dalam kehidupan sehari-hari.
+                                </p>
+                                <p>
+                                    Selain itu, madrasah juga berupaya mengikuti perkembangan zaman dengan memanfaatkan
+                                    teknologi dalam proses pembelajaran, sehingga peserta didik memiliki bekal yang
+                                    seimbang antara ilmu pengetahuan, keterampilan, dan nilai-nilai spiritual.
                                 </p>
                             </div>
                         </div>
 
                         <!-- Divider -->
-                        <div class="h-px bg-gray-200 dark:bg-gray-800"></div>
+                        {{-- <div class="h-px bg-gray-200 dark:bg-gray-800"></div> --}}
 
                         <!-- Keunggulan -->
-                        <div>
+                        {{-- <div>
                             <h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white mb-4">
                                 Keunggulan Madrasah
                             </h2>
@@ -107,32 +114,7 @@
                                     sebagai buah dari pembinaan yang konsisten dan terprogram.
                                 </p>
                             </div>
-                        </div>
-
-                        <!-- Divider -->
-                        <div class="h-px bg-gray-200 dark:bg-gray-800"></div>
-
-                        <!-- Lingkungan dan fasilitas -->
-                        <div>
-                            <h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white mb-4">
-                                Lingkungan &amp; Fasilitas
-                            </h2>
-                            <div
-                                class="space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                                <p>
-                                    MIS Fathul Iman didukung oleh lingkungan belajar yang bersih, hijau, dan nyaman.
-                                    Ruang kelas yang representatif, mushalla untuk kegiatan ibadah, perpustakaan,
-                                    serta area bermain yang aman menjadi bagian dari fasilitas yang terus
-                                    dibenahi demi kenyamanan peserta didik.
-                                </p>
-                                <p>
-                                    Komitmen madrasah terhadap kualitas tidak berhenti pada fasilitas fisik semata.
-                                    Hubungan harmonis antara guru, siswa, dan orang tua dibangun melalui komunikasi
-                                    yang terbuka dan program parenting berkala, sehingga proses pendidikan dapat
-                                    berjalan secara sinergis antara madrasah dan keluarga.
-                                </p>
-                            </div>
-                        </div>
+                        </div> --}}
 
                         <!-- Divider -->
                         <div class="h-px bg-gray-200 dark:bg-gray-800"></div>
@@ -145,15 +127,24 @@
                             <div
                                 class="space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                                 <p>
-                                    Dengan pengalaman lebih dari empat dekade, MIS Fathul Iman terus bertransformasi
-                                    mengikuti perkembangan zaman tanpa meninggalkan nilai-nilai Islam yang menjadi
-                                    ruhnya. Madrasah ini bukan sekadar tempat belajar, melainkan rumah kedua bagi
-                                    setiap siswa untuk tumbuh, berkembang, dan menemukan jati dirinya sebagai
-                                    generasi Muslim yang tangguh.
+                                    MIS Fathul Iman berkomitmen untuk memberikan layanan pendidikan yang berkualitas,
+                                    adil, dan inklusif bagi seluruh peserta didik tanpa membedakan latar belakang
+                                    sosial, ekonomi, maupun budaya. Dengan dukungan tenaga pendidik yang profesional dan
+                                    berdedikasi, madrasah terus berupaya menciptakan lingkungan belajar yang religius,
+                                    sehat, dan harmonis.
+                                </p>
+                                <p>
+                                    Komitmen ini diwujudkan melalui pengembangan potensi peserta didik secara
+                                    menyeluruh, baik dalam bidang akademik maupun non-akademik, serta pembinaan karakter
+                                    yang menanamkan nilai disiplin, tanggung jawab, kemandirian, dan cinta tanah air.
+                                    MIS Fathul Iman juga terus berupaya meningkatkan mutu pendidikan melalui inovasi
+                                    pembelajaran dan pemanfaatan teknologi, sehingga mampu mencetak lulusan yang siap
+                                    melanjutkan pendidikan ke jenjang yang lebih tinggi serta memberikan kontribusi
+                                    positif bagi masyarakat, bangsa, dan agama.
                                 </p>
                             </div>
 
-                            <blockquote class="mt-6 pl-5 border-l-4 border-primary-dark dark:border-green-500">
+                            {{-- <blockquote class="mt-6 pl-5 border-l-4 border-primary-dark dark:border-green-500">
                                 <p class="text-sm sm:text-base italic text-gray-600 dark:text-gray-400 leading-relaxed">
                                     "Kami hadir bukan hanya untuk mendidik pikiran, tetapi juga untuk
                                     membentuk hati dan jiwa — karena generasi terbaik adalah mereka yang
@@ -162,9 +153,8 @@
                                 <cite class="mt-2 block text-xs text-gray-400 dark:text-gray-500 not-italic">
                                     — Kepala Madrasah MIS Fathul Iman
                                 </cite>
-                            </blockquote>
+                            </blockquote> --}}
                         </div>
-
                     </div>
                 </div>
             </div>

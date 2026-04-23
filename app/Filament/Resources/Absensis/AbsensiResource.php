@@ -5,7 +5,9 @@ namespace App\Filament\Resources\Absensis;
 use App\Filament\Resources\Absensis\Pages\CreateAbsensi;
 use App\Filament\Resources\Absensis\Pages\EditAbsensi;
 use App\Filament\Resources\Absensis\Pages\ListAbsensis;
+use App\Filament\Resources\Absensis\Pages\ViewAbsensi;
 use App\Filament\Resources\Absensis\Schemas\AbsensiForm;
+use App\Filament\Resources\Absensis\Schemas\AbsensiInfolist;
 use App\Filament\Resources\Absensis\Tables\AbsensisTable;
 use App\Models\Absensi;
 use BackedEnum;
@@ -34,6 +36,11 @@ class AbsensiResource extends Resource
         return AbsensisTable::configure($table);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return AbsensiInfolist::configure($schema);
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -47,6 +54,7 @@ class AbsensiResource extends Resource
             'index' => ListAbsensis::route('/'),
             'create' => CreateAbsensi::route('/create'),
             'edit' => EditAbsensi::route('/{record}/edit'),
+            'view'   => ViewAbsensi::route('/{record}'),
         ];
     }
 }
