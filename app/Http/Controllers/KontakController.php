@@ -42,7 +42,7 @@ class KontakController extends Controller
 
         try {
             // Kirim email ke alamat sekolah
-            Mail::to(env('MAIL_TO_ADDRESS'))
+            Mail::to(config('mail.to_address'))
                 ->send(new PesanKontak($validated));
 
             return redirect()
