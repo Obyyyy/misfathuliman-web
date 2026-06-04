@@ -23,7 +23,7 @@
                             <div
                                 class="relative bg-[#e5020a] h-72 sm:h-96 flex items-center justify-center overflow-hidden">
                                 <img src="{{ asset('storage/' . $kepalaMadrasah->foto) }}" alt="Foto Kepala Madrasah"
-                                    class="w-full h-full object-cover object-center"
+                                    loading="lazy" class="w-full h-full object-cover object-center"
                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <!-- Fallback avatar -->
                                 <div
@@ -71,6 +71,7 @@
                                 <div
                                     class="relative bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 h-36 sm:h-44 flex items-center justify-center overflow-hidden">
                                     <img src="{{ asset('storage/' . $guru->foto) }}" alt="Foto {{ $guru->name }}"
+                                        loading="lazy"
                                         class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                     <!-- Fallback avatar -->
@@ -117,6 +118,7 @@
                                 <div
                                     class="relative bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 h-36 sm:h-44 flex items-center justify-center overflow-hidden">
                                     <img src="{{ asset('storage/' . $guru->foto) }}" alt="Foto {{ $guru->name }}"
+                                        loading="lazy"
                                         class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                     <!-- Fallback avatar -->
@@ -162,6 +164,7 @@
                                 <div
                                     class="relative bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 h-36 sm:h-44 flex items-center justify-center overflow-hidden">
                                     <img src="{{ asset('storage/' . $staf->foto) }}" alt="Foto {{ $staf->name }}"
+                                        loading="lazy"
                                         class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                     <!-- Fallback avatar -->

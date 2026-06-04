@@ -47,7 +47,8 @@
 
                             <!-- Foto / avatar fallback -->
                             <div class="flex-shrink-0 relative">
-                                <img src="{{ asset('images/kepmad.png') }}" alt="Foto Kepala Madrasah"
+                                <img src="{{ asset('images/kepmad.png') }}" alt="Foto Kepala Madrasah" loading="lazy"
+                                    decoding="async"
                                     class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover object-center border-4 border-white dark:border-gray-700 shadow-lg"
                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div
@@ -76,11 +77,11 @@
                                 </p>
                                 <h2
                                     class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white leading-snug">
-                                    {{ $kepala['nama'] }}
+                                    {{ $kepalaMadrasah->name }}
                                 </h2>
-                                @if (!empty($kepala['nip']))
+                                @if (!empty($kepalaMadrasah->nip))
                                     <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
-                                        {{ $kepala['nip'] }}
+                                        {{ $kepalaMadrasah->nip }}
                                     </p>
                                 @endif
                                 <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -193,11 +194,8 @@
                             </div> --}}
 
                             <p class="font-extrabold text-sm mt-2 text-gray-900 dark:text-white">
-                                {{ $kepala->name }}
+                                {{ $kepalaMadrasah->name }}
                             </p>
-                            {{-- @if (!empty($kepala['nip']))
-                                <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{{ $kepala['nip'] }}</p>
-                            @endif --}}
                         </div>
                     </div>
                 </div>

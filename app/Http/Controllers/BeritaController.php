@@ -135,10 +135,5 @@ class BeritaController extends Controller
             'seoTitle', 'seoDescription', 'seoCanonical', 'seoImage',
             'jsonLd', 'jsonLdBreadcrumb'
         ));
-
-        return view('pages.berita.berita-show', compact(
-            'title', 'subtitle', 'breadcrumbs',
-            'post', 'postinganTerbaru', 'kategoriList'
-        ));
     }
 }

@@ -19,6 +19,7 @@ class AbsensiPage extends Page
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowRightEndOnRectangle;
     protected static ?string $navigationLabel = 'Presensi';
     protected static ?string $title = 'Halaman Presensi';
+    protected static ?string $slug = 'presensi';
 
     // Koordinat sekolah (dari iframe maps kamu)
     const SEKOLAH_LAT = -2.2311686373879684;

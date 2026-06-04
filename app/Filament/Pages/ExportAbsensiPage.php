@@ -28,6 +28,7 @@ class ExportAbsensiPage extends Page
     protected static ?string $navigationLabel = 'Export Absensi';
     protected static string|UnitEnum|null $navigationGroup = 'Guru & Staf';
     protected static ?string $title = 'Export Data Absensi';
+    protected static ?string $slug = 'export-absensi';
 
     public ?string $bulan            = '';
     public ?string $tahun            = '';

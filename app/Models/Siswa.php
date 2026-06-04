@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Siswa extends Model
 {
-    protected $connection = 'subdomain'; // ← ini saja
+    protected $connection = 'subdomain';
     protected $table = 'e_siswa';
     protected $primaryKey = 'siswa_id';
 

@@ -24,6 +24,7 @@ class EditProfilByGuru extends Page
     protected static ?int $navigationSort = 99;
     protected string $view = 'filament.pages.edit-profil-by-guru';
     protected static ?string $title = 'Edit Profil';
+    protected static ?string $slug = 'edit-profil';
 
     public string $name     = '';
     public string $email    = '';
@@ -106,7 +107,7 @@ class EditProfilByGuru extends Page
                 ])->columns(2),
 
             Section::make('Data Kepegawaian')
-                // ->description('Hubungi admin untuk mengubah jabatan.')
+                ->description('Hubungi admin untuk mengubah jabatan.')
                 ->schema([
                     TextInput::make('nip')
                         ->label('NIP')

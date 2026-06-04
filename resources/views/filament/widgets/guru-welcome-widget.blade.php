@@ -15,30 +15,26 @@
                 @endif
             </div>
 
-            {{-- Info --}}
-            <div style="flex: 1;">
+            {{-- Info + Tanggal --}}
+            <div style="flex: 1; min-width: 0;">
                 <p style="font-size: 0.85rem; color: rgb(var(--gray-400)); margin-bottom: 0.25rem;">
                     Selamat datang 👋
                 </p>
                 <p style="font-size: 1.4rem; font-weight: 800; color: rgb(var(--gray-950)); margin-bottom: 0.25rem;">
                     {{ auth()->user()->name }}
                 </p>
-                <p style="font-size: 0.875rem; color: rgb(var(--gray-500));">
-                    {{ auth()->user()->profilGuru?->jabatan ?? 'Guru' }}
+                <p style="font-size: 0.875rem; color: rgb(var(--gray-500)); margin-bottom: 0.5rem;">
+                    {{ auth()->user()->profilGuru?->jabatan ?? '' }}
                     @if (auth()->user()->profilGuru?->nama_jabatan)
                         · {{ auth()->user()->profilGuru->nama_jabatan }}
                     @endif
                 </p>
-            </div>
-
-            {{-- Tanggal --}}
-            <div style="text-align: right; flex-shrink: 0;">
-                <p style="font-size: 0.75rem; color: rgb(var(--gray-400));">Hari ini</p>
-                <p style="font-size: 1rem; font-weight: 700; color: rgb(var(--gray-700));">
-                    {{ now()->translatedFormat('l') }}
-                </p>
-                <p style="font-size: 0.875rem; color: rgb(var(--gray-500));">
-                    {{ now()->translatedFormat('d F Y') }}
+                {{-- Tanggal inline di bawah info --}}
+                <p style="font-size: 0.8rem; color: rgb(var(--gray-400)); margin: 0;">
+                    Hari ini:
+                    <span style="font-weight: 700; color: rgb(var(--gray-700));">
+                        {{ now()->translatedFormat('l, d F Y') }}
+                    </span>
                 </p>
             </div>
         </div>
@@ -49,7 +45,7 @@
             style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
 
             @unless (auth()->user()->hasRole('humas'))
-                <a href="{{ route('filament.admin.pages.absensi-page') }}"
+                <a href="{{ route('filament.admin.pages.presensi') }}"
                     style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: rgb(var(--color-success-500)); border-radius: 0.75rem; text-decoration: none; box-shadow: 0 2px 10px rgba(0,0,0,0.15);">
                     <span style="font-size: 1.5rem;">🕐</span>
                     <div>
@@ -60,7 +56,7 @@
                 </a>
             @endunless
 
-            <a href="{{ route('filament.admin.pages.edit-profil-by-guru') }}"
+            <a href="{{ route('filament.admin.pages.edit-profil') }}"
                 style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: rgb(var(--color-primary-500)); border-radius: 0.75rem; text-decoration: none; box-shadow: 0 2px 10px rgba(0,0,0,0.15);">
                 <span style="font-size: 1.5rem;">👤</span>
                 <div>

@@ -45,7 +45,7 @@
                             <!-- Gambar struktur -->
                             <img src="{{ asset('storage/' . $gambar->gambar) }}"
                                 alt="Bagan Struktur Organisasi MIS Fathul Iman" id="imgStruktur"
-                                class="w-full h-auto object-contain cursor-zoom-in"
+                                class="w-full h-auto object-contain cursor-zoom-in" loading="lazy"
                                 onerror="this.style.display='none'; document.getElementById('imgFallback').style.display='flex'">
 
                             <!-- Fallback jika gambar belum ada -->

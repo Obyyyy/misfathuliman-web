@@ -44,7 +44,7 @@
                 <div
                     class="w-16 h-14 rounded-lg overflow-hidden bg-gradient-to-br from-primary/20 to-primary-dark/30 dark:from-gray-700 dark:to-gray-600 flex-shrink-0">
                     @if ($p->thumbnail)
-                        <img src="{{ asset('storage/' . $p->thumbnail) }}" alt="{{ $p->judul }}"
+                        <img src="{{ asset('storage/' . $p->thumbnail) }}" alt="{{ $p->judul }}" loading="lazy"
                             class="w-full h-full object-cover" onerror="this.style.display='none'">
                     @endif
                 </div>

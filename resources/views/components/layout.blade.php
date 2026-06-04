@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MIS Fathul Iman</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- SEO --}}
+    @stack('head')
+
     <style>
         /* Smooth scroll */
         html {

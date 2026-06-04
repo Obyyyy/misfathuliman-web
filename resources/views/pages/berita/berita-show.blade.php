@@ -122,7 +122,7 @@
                                     {{-- Thumbnail di awal konten --}}
                                     @if ($post->thumbnail)
                                         <img src="{{ asset('storage/' . $post->thumbnail) }}"
-                                            alt="{{ $post->judul }}" width="800" height="450" loading="eager"
+                                            alt="{{ $post->judul }}" width="800" height="450" loading="lazy"
                                             fetchpriority="high" itemprop="image"
                                             class="w-[60%] mx-auto rounded-xl shadow-md mb-6 object-cover">
                                     @endif

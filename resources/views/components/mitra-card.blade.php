@@ -29,7 +29,7 @@
             <div class="w-15 h-15 rounded-xl flex items-center justify-center flex-shrink-0 {{ $iconBg }}">
                 @if ($mitra['ikon_gambar'])
                     <img src="{{ asset('storage/' . $mitra['ikon_gambar']) }}" alt="Logo {{ $mitra['nama'] }}"
-                        class="w-10 h-10 object-contain">
+                        loading="lazy" class="w-10 h-10 object-contain">
                 @else
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

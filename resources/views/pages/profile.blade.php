@@ -21,7 +21,7 @@
                                     <div
                                         class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
                                         <img src="{{ asset('images/logo.png') }}" alt="Logo MIS Fathul Iman"
-                                            class="w-9 h-9 rounded-lg object-cover"
+                                            loading="lazy" class="w-9 h-9 rounded-lg object-cover"
                                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                         <span class="hidden text-white font-bold text-xs text-center leading-tight">MIS
                                             FI</span>

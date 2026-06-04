@@ -37,8 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(Login::class)
             ->brandName('MIS Fathul Iman')
-            // ->brandLogo(asset('storage/' . Gambar::where('jenis', 'Logo Sekolah')->first()->gambar))
-            // ->brandLogoHeight('2.5rem')
+            ->globalSearch(false)
             ->colors([
                 'primary' => Color::Emerald,
             ])
