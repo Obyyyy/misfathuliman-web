@@ -24,7 +24,7 @@ class AbsensiPage extends Page
     // Koordinat sekolah (dari iframe maps kamu)
     const SEKOLAH_LAT = -2.2311686373879684;
     const SEKOLAH_LNG = 113.91769707454809;
-    const RADIUS_METER = 1000; // 1.5 km
+    const RADIUS_METER = 1000; // 1 km
     const JAM_BATAS_PULANG = '10:30';
 
     public float $latitude    = 0;

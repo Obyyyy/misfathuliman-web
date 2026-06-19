@@ -1,11 +1,8 @@
 <x-filament-panels::page>
 
     <script>
-        function ambilLokasiGPS() {
-            if (!navigator.geolocation) {
-                alert('Browser Anda tidak mendukung GPS.');
-                return;
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!navigator.geolocation) return;
             navigator.geolocation.getCurrentPosition(
                 function(pos) {
                     @this.set('latitude', pos.coords.latitude);
@@ -14,21 +11,11 @@
                 },
                 function(err) {
                     console.warn('GPS error:', err.message);
-                    alert('Gagal mendapatkan lokasi: ' + err.message +
-                        '\n\nDi iPhone, aktifkan izin lokasi di Settings > Privacy > Location Services > Safari Websites, lalu tekan tombol "Deteksi Ulang Lokasi" di bawah.'
-                        );
                 }, {
                     enableHighAccuracy: true,
                     timeout: 10000
                 }
             );
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Coba otomatis dulu — bekerja baik di Chrome/Android.
-            // Di Safari iOS kemungkinan gagal diam-diam tanpa popup,
-            // makanya tombol manual "Deteksi Ulang Lokasi" tetap disediakan di bawah.
-            ambilLokasiGPS();
         });
     </script>
 
@@ -66,19 +53,6 @@
                 <p style="color: #d97706; font-weight: 600; font-size: 0.875rem;">
                     ⏳ Mendeteksi lokasi GPS... (izinkan akses lokasi di browser)
                 </p>
-                <button type="button" onclick="ambilLokasiGPS()"
-                    style="
-                    padding: 0.5rem 1.25rem;
-                    border-radius: 0.6rem;
-                    font-size: 0.875rem;
-                    font-weight: 700;
-                    background: #2563eb;
-                    color: white;
-                    border: none;
-                    cursor: pointer;
-                ">
-                    📍 Deteksi Ulang Lokasi
-                </button>
             @endif
 
         </div>
