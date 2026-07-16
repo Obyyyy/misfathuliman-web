@@ -257,10 +257,10 @@
                         </svg>
                     </a>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-start">
                     @foreach ($beritaTerbaru as $berita)
                         <article
-                            class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md hover:-translate-y-1 overflow-hidden transition-all duration-200">
+                            class="group flex flex-col bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md hover:-translate-y-1 overflow-hidden transition-all duration-200">
                             <a href="{{ route('berita.show', $berita->slug) }}" class="block cursor-pointer">
                                 <div
                                     class="relative h-44 bg-gradient-to-br from-primary/20 to-green-900/30 dark:from-gray-700 dark:to-gray-600 overflow-hidden">
@@ -280,7 +280,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <div class="p-4 sm:p-5">
+                            <div class="p-4 sm:p-5 flex flex-col flex-1 overflow-hidden">
                                 <div class="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500 mb-2.5">
                                     <span class="flex items-center gap-1">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor"
@@ -307,7 +307,7 @@
                                 </a>
                                 <p
                                     class="mt-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-2">
-                                    {!! \Illuminate\Support\Str::limit($berita->konten, 50) !!}
+                                    {!! \Illuminate\Support\Str::limit($berita->konten, 40) !!}
                                 </p>
                             </div>
                         </article>

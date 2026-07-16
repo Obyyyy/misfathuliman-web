@@ -104,6 +104,10 @@ class AdminPanelProvider extends PanelProvider
             ->loginRouteSlug('masuk')
             ->renderHook(
                 PanelsRenderHook::HEAD_END,
+                fn () => view('filament.meta-head')
+            )
+            ->renderHook(
+                PanelsRenderHook::HEAD_END,
                 fn () => '<meta name="vapid-public-key" content="' . config('webpush.vapid.public_key') . '">'
             )
             ->renderHook(
