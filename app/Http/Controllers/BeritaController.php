@@ -125,7 +125,7 @@ class BeritaController extends Controller
                 '@type'    => 'ListItem',
                 'position' => $i + 1,
                 'name'     => $b['label'],
-                'item'     => $b['url'],
+                'item'     => url($b['url']),
             ])->toArray(),
         ];
 

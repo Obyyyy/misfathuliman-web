@@ -16,7 +16,7 @@
                     console.warn('GPS error:', err.message);
                     alert('Gagal mendapatkan lokasi: ' + err.message +
                         '\n\nDi iPhone, aktifkan izin lokasi di Settings > Privacy > Location Services > Safari Websites, lalu tekan tombol "Deteksi Ulang Lokasi" di bawah.'
-                        );
+                    );
                 }, {
                     enableHighAccuracy: true,
                     timeout: 10000
@@ -133,9 +133,10 @@
         <x-filament::section heading="Absen Pulang">
             <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                 @if (!$absensi?->waktu_pulang && $absensi?->waktu_masuk)
-                    @if (now()->format('H:i') < '10:30')
+                    @if (now()->format('H:i') < $this->jamBatasPulang())
                         <p style="font-size: 0.8rem; color: #d97706; font-weight: 600;">
-                            ⏰ Absen pulang tersedia mulai pukul 10.30 WIB
+                            ⏰ Absen pulang tersedia mulai pukul
+                            {{ \Carbon\Carbon::createFromTimeString($this->jamBatasPulang())->format('H.i') }} WIB
                         </p>
                     @endif
                 @endif

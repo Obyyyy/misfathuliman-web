@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Absensis;
 
+// use App\Filament\Pages\AbsensiMassalPage;
 use App\Filament\Resources\Absensis\Pages\CreateAbsensi;
 use App\Filament\Resources\Absensis\Pages\EditAbsensi;
 use App\Filament\Resources\Absensis\Pages\ListAbsensis;
@@ -51,9 +52,10 @@ class AbsensiResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListAbsensis::route('/'),
+            'index'  => ListAbsensis::route('/'),
             'create' => CreateAbsensi::route('/create'),
-            'edit' => EditAbsensi::route('/{record}/edit'),
+            // 'massal' => AbsensiMassalPage::route('/massal'),
+            'edit'   => EditAbsensi::route('/{record}/edit'),
             'view'   => ViewAbsensi::route('/{record}'),
         ];
     }

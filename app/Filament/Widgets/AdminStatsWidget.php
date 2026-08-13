@@ -41,8 +41,8 @@ class AdminStatsWidget extends BaseWidget
     protected function getStats(): array
     {
         $tanggal     = $this->tanggal ?: today()->toDateString();
-        $totalGuru   = User::count();
-        $sudahAbsen  = Absensi::where('tanggal', $tanggal)->whereNotNull('waktu_masuk')->count();
+        $totalGuru   = User::whereDoesntHave('roles', fn ($q) => $q->where('name', 'humas'))->count();
+        $sudahAbsen  = Absensi::where('tanggal', $tanggal)->whereNotNull('status')->count();
         $belumAbsen  = $totalGuru - $sudahAbsen;
         $terlambat   = Absensi::where('tanggal', $tanggal)->where('status', 'terlambat')->count();
         $totalBerita = Berita::count();

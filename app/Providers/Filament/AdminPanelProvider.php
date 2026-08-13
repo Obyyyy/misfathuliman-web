@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\AbsensiMassalPage;
 use App\Filament\Pages\AbsensiPage;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\EditProfilByGuru;
@@ -49,6 +50,7 @@ class AdminPanelProvider extends PanelProvider
                 // Dashboard::class,
                 EditProfilByGuru::class,
                 AbsensiPage::class,
+                AbsensiMassalPage::class
             ])
             ->navigationGroups([
                 'Guru & Staf',

@@ -61,6 +61,8 @@ class AdminRekapAbsensiWidget extends TableWidget
                     'profilGuru',
                     'absensiTanggal' => fn($q) => $q->where('tanggal', $tanggal),
                 ])
+                ->whereDoesntHave('roles', fn ($q) => $q->where('name', 'humas'))
+                ->orderBy('name')
             )
             ->columns([
                 TextColumn::make('name')

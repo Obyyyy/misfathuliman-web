@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Exports\AbsensiExport;
+use App\Exports\AbsensiSingleExport;
 use App\Models\User;
 use BackedEnum;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
@@ -36,6 +37,7 @@ class ExportAbsensiPage extends Page
     public bool    $gunakan_rentang  = false;
     public ?string $tanggal_mulai    = null;
     public ?string $tanggal_selesai  = null;
+    public array   $kecualikan_user  = [];
 
     public function mount(): void
     {
@@ -52,6 +54,7 @@ class ExportAbsensiPage extends Page
             'gunakan_rentang' => false,
             'tanggal_mulai'   => $this->tanggal_mulai,
             'tanggal_selesai' => $this->tanggal_selesai,
+            'kecualikan_user' => [],
         ]);
     }
 
@@ -116,15 +119,44 @@ class ExportAbsensiPage extends Page
             Select::make('user_id')
                 ->label('Guru / Staf')
                 ->placeholder('Semua Guru & Staf')
+                ->helperText('Pilih 1 guru untuk format detail individu, atau kosongkan untuk format rekap semua guru.')
                 ->options(
-                    // Tampilkan NIP + Nama agar mudah dicari
-                    User::all()->mapWithKeys(
-                        fn ($u) => [$u->id => trim(($u->nip ? "[{$u->nip}] " : '') . $u->name)]
-                    )->toArray()
+                    User::with('profilGuru')
+                        ->whereHas('profilGuru')
+                        ->whereDoesntHave('roles', fn ($q) => $q->where('name', 'humas'))
+                        ->orderBy('name')
+                        ->get()
+                        ->mapWithKeys(
+                            fn ($u) => [$u->id => trim(($u->profilGuru?->nip ? "[{$u->profilGuru->nip}] " : '') . $u->name)]
+                        )
+                        ->toArray()
                 )
                 ->searchable()
                 ->nullable()
+                ->live()
                 ->columnSpanFull(),
+
+            // --- Kecualikan Guru / Staf (hanya tampil kalau tidak pilih 1 guru) ---
+            Select::make('kecualikan_user')
+                ->label('Kecualikan Guru / Staf')
+                ->placeholder('Pilih yang ingin dikecualikan dari export...')
+                ->helperText('Guru atau staf yang dipilih di sini tidak akan muncul di file Excel.')
+                ->options(
+                    User::with('profilGuru')
+                        ->whereHas('profilGuru')
+                        ->whereDoesntHave('roles', fn ($q) => $q->where('name', 'humas'))
+                        ->orderBy('name')
+                        ->get()
+                        ->mapWithKeys(
+                            fn ($u) => [$u->id => trim(($u->profilGuru?->nip ? "[{$u->profilGuru->nip}] " : '') . $u->name)]
+                        )
+                        ->toArray()
+                )
+                ->multiple()
+                ->searchable()
+                ->nullable()
+                ->columnSpanFull()
+                ->visible(fn ($get) => ! $get('user_id')), // sembunyikan kalau pilih 1 guru
         ]);
     }
 
@@ -135,28 +167,64 @@ class ExportAbsensiPage extends Page
             ->icon('heroicon-o-arrow-down-tray')
             ->color('success')
             ->action(function () {
-                $data = $this->form->getState();
-
-                $userId         = $data['user_id'] ?? null;
+                $data           = $this->form->getState();
+                $userId         = $data['user_id']         ?? null;
                 $gunakanRentang = $data['gunakan_rentang'] ?? false;
+                $kecualikanUser = $data['kecualikan_user'] ?? [];
 
+                // ============================================
+                // MODE: 1 GURU — format detail individu
+                // ============================================
+                if ($userId) {
+                    $user = User::find($userId);
+                    $namaFile = 'absensi-' . \Illuminate\Support\Str::slug($user->name);
+
+                    if ($gunakanRentang) {
+                        $mulai   = Carbon::parse($data['tanggal_mulai']);
+                        $selesai = Carbon::parse($data['tanggal_selesai']);
+                        $namaFile .= '-' . $mulai->format('d-m-Y') . '-sd-' . $selesai->format('d-m-Y') . '.xlsx';
+
+                        return Excel::download(
+                            new AbsensiSingleExport(
+                                userId: $userId,
+                                tanggalMulai: $mulai->toDateString(),
+                                tanggalSelesai: $selesai->toDateString(),
+                            ),
+                            $namaFile
+                        );
+                    }
+
+                    $bulan     = $data['bulan'];
+                    $tahun     = $data['tahun'];
+                    $namaBulan = Carbon::create()->month((int) $bulan)->translatedFormat('F');
+                    $namaFile .= '-' . strtolower($namaBulan) . '-' . $tahun . '.xlsx';
+
+                    return Excel::download(
+                        new AbsensiSingleExport(
+                            userId: $userId,
+                            bulan: $bulan,
+                            tahun: $tahun,
+                        ),
+                        $namaFile
+                    );
+                }
+
+                // ============================================
+                // MODE: SEMUA GURU — format rekap horizontal
+                // ============================================
                 if ($gunakanRentang) {
                     $mulai   = Carbon::parse($data['tanggal_mulai']);
                     $selesai = Carbon::parse($data['tanggal_selesai']);
-
-                    $filename = 'absensi-'
-                        . $mulai->format('d-m-Y')
-                        . '-sd-'
-                        . $selesai->format('d-m-Y')
-                        . '.xlsx';
+                    $filename = 'absensi-' . $mulai->format('d-m-Y') . '-sd-' . $selesai->format('d-m-Y') . '.xlsx';
 
                     return Excel::download(
                         new AbsensiExport(
                             bulan: null,
                             tahun: null,
-                            userId: $userId,
+                            userId: null,
                             tanggalMulai: $mulai->toDateString(),
                             tanggalSelesai: $selesai->toDateString(),
+                            kecualikanUserIds: $kecualikanUser,
                         ),
                         $filename
                     );
@@ -171,9 +239,10 @@ class ExportAbsensiPage extends Page
                     new AbsensiExport(
                         bulan: $bulan,
                         tahun: $tahun,
-                        userId: $userId,
+                        userId: null,
                         tanggalMulai: null,
                         tanggalSelesai: null,
+                        kecualikanUserIds: $kecualikanUser,
                     ),
                     $filename
                 );

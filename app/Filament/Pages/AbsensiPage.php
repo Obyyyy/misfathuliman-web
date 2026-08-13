@@ -25,7 +25,9 @@ class AbsensiPage extends Page
     const SEKOLAH_LAT = -2.2311686373879684;
     const SEKOLAH_LNG = 113.91769707454809;
     const RADIUS_METER = 1000; // 1 km
-    const JAM_BATAS_PULANG = '10:30';
+    const JAM_BATAS_PULANG_JUMAT  = '10:30';
+    const JAM_BATAS_PULANG_SABTU  = '12:00';
+    const JAM_BATAS_PULANG_BIASA  = '13:00';
 
     public float $latitude    = 0;
     public float $longitude   = 0;
@@ -63,9 +65,17 @@ class AbsensiPage extends Page
         return $jarak <= self::RADIUS_METER;
     }
 
+    public function jamBatasPulang(): string
+    {
+        // Senin-Kamis -> 13:00, Jumat → 10:30, & Sabtu → 12:00
+        if (now()->isFriday()) return self::JAM_BATAS_PULANG_JUMAT;
+        if (now()->isSaturday()) return self::JAM_BATAS_PULANG_SABTU;
+        return self::JAM_BATAS_PULANG_BIASA;
+    }
+
     private function bolehAbsenPulang(): bool
     {
-        return now()->format('H:i') >= self::JAM_BATAS_PULANG;
+        return now()->format('H:i') >= $this->jamBatasPulang();
     }
 
     public function getJarakKeSekolah(): string
@@ -173,7 +183,7 @@ class AbsensiPage extends Page
                 if (!$this->bolehAbsenPulang()) {
                     Notification::make()
                         ->title('Belum waktunya pulang')
-                        ->body('Absen pulang baru bisa dilakukan mulai pukul ' . self::JAM_BATAS_PULANG . ' WIB.')
+                        ->body('Absen pulang baru bisa dilakukan mulai pukul ' . $this->jamBatasPulang() . ' WIB.')
                         ->warning()
                         ->send();
                     return;
