@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\PengaturanAbsensi;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -68,9 +69,16 @@ class Absensi extends Model
     // Sesuaikan jam batas terlambat di sini
     public static function tentukanStatus(string $waktuMasuk): string
     {
-        $masuk     = Carbon::createFromTimeString($waktuMasuk);
-        $batasHadir = Carbon::createFromTimeString('07:00:00');
+        $pengaturan = PengaturanAbsensi::getPengaturan();
 
-        return $masuk->lte($batasHadir) ? 'hadir' : 'terlambat';
+        $masuk = Carbon::createFromTimeString($waktuMasuk);
+
+        $batasHadir = Carbon::createFromTimeString(
+            $pengaturan->batas_hadir
+        );
+
+        return $masuk->lte($batasHadir)
+            ? 'hadir'
+            : 'terlambat';
     }
 }

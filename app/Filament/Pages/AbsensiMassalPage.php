@@ -116,11 +116,13 @@ class AbsensiMassalPage extends Page
 
                         TimePicker::make('waktu_masuk')
                             ->label('Jam Masuk')
+                            ->required()
                             ->seconds(false)
                             ->visible(fn ($get) => in_array($get('status'), ['hadir', 'terlambat'])),
 
                         TimePicker::make('waktu_pulang')
                             ->label('Jam Pulang')
+                            ->required()
                             ->seconds(false)
                             ->visible(fn ($get) => in_array($get('status'), ['hadir', 'terlambat'])),
 

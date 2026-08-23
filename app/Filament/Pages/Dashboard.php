@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use App\Filament\Widgets\AdminBeritaTerbaruWidget;
 use App\Filament\Widgets\AdminRekapAbsensiWidget;
 use App\Filament\Widgets\AdminStatsWidget;
+use App\Filament\Widgets\GuruHistoryAbsensiWidget;
 use App\Filament\Widgets\GuruStatusAbsensiWidget;
 use App\Filament\Widgets\GuruWelcomeWidget;
 use App\Filament\Widgets\TanggalFilterWidget;
@@ -25,6 +26,7 @@ class Dashboard extends BaseDashboard
             return [
                 GuruWelcomeWidget::class,
                 GuruStatusAbsensiWidget::class,
+                GuruHistoryAbsensiWidget::class,
                 TanggalFilterWidget::class,
                 AdminStatsWidget::class,
                 AdminRekapAbsensiWidget::class,
@@ -39,6 +41,7 @@ class Dashboard extends BaseDashboard
         return [
             GuruWelcomeWidget::class,
             GuruStatusAbsensiWidget::class,
+            GuruHistoryAbsensiWidget::class,
         ];
     }
 

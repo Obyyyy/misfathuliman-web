@@ -6,10 +6,12 @@ use App\Filament\Pages\AbsensiMassalPage;
 use App\Filament\Pages\AbsensiPage;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\EditProfilByGuru;
+use App\Filament\Pages\PengaturanAbsensiPage;
 use App\Filament\Widgets\AdminRekapAbsensiWidget;
 use App\Filament\Widgets\AdminStatsWidget;
 use App\Filament\Widgets\GuruWelcomeWidget;
 use App\Filament\Widgets\TanggalFilterWidget;
+use App\Models\PengaturanAbsensi;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use BezhanSalleh\FilamentShield\Middleware\SyncShieldTenant;
 use Filament\Http\Middleware\Authenticate;
@@ -50,7 +52,8 @@ class AdminPanelProvider extends PanelProvider
                 // Dashboard::class,
                 EditProfilByGuru::class,
                 AbsensiPage::class,
-                AbsensiMassalPage::class
+                AbsensiMassalPage::class,
+                PengaturanAbsensiPage::class,
             ])
             ->navigationGroups([
                 'Guru & Staf',
