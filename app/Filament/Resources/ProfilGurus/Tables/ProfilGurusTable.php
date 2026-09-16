@@ -9,6 +9,11 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Filters\TrashedFilter;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ForceDeleteBulkAction;
 
 class ProfilGurusTable
 {
@@ -38,12 +43,6 @@ class ProfilGurusTable
                         default       => 'gray',
                     })
                     ->separator(','),
-                // TextColumn::make('profilGuru.nip')
-                //     ->label('NIP')
-                //     ->searchable(),
-                // TextColumn::make('profilGuru.pendidikan')
-                //     ->label('Pendidikan')
-                //     ->badge(),
                 TextColumn::make('profilGuru.jabatan')
                     ->label('Jabatan')
                     ->badge(),
@@ -65,15 +64,20 @@ class ProfilGurusTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                TrashedFilter::make(),
             ])
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+
+                RestoreAction::make(),
+                ForceDeleteAction::make(),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
+                    BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    RestoreBulkAction::make(),
+                    ForceDeleteBulkAction::make(),
                 ]),
             ]);
     }

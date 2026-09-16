@@ -15,6 +15,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use NotificationChannels\WebPush\HasPushSubscriptions;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
@@ -22,6 +23,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     use HasFactory, Notifiable;
     use HasRoles;
     use HasPushSubscriptions;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -111,7 +113,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         });
 
         static::deleting(function ($model) {
-            if ($model->foto) {
+            if ($model->isForceDeleting() && $model->foto) {
                 Storage::disk('public')->delete($model->foto);
             }
         });
